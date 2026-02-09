@@ -1,0 +1,48 @@
+<html>
+<head><meta charset="utf-8" />
+<meta http-equiv="refresh" content="60">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  :root {
+    --bg: #0b0f19;
+    --panel: #0e1525;
+    --ink: #e5e7eb;
+    --muted: #94a3b8;
+    --accent: #22d3ee;
+    --accent-2: #a78bfa;
+    --grid: #1f2937;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    color: var(--ink);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 0;
+    transform: translateY(2px);
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .plotly-graph-div {
+    background: var(--panel) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--shadow) !important;
+  }
+  /* Scrollbar oscuro */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #4a5568; }
+</style>
+</head>
+<body>
+    <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.1.min.js" integrity="sha256-oy6Be7Eh6eiQFs5M7oXuPxxm9qbJXEtTpfSI93dW16Q=" crossorigin="anonymous"></script>                <div id="de45c458-5582-4838-a541-bf0194d00d69" class="plotly-graph-div" style="height:3200px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("de45c458-5582-4838-a541-bf0194d00d69")) {                    Plotly.newPlot(                        "de45c458-5582-4838-a541-bf0194d00d69",                        [{"type": "indicator", "mode": "number+delta", "value": 85.5, "title": {"text": "Winrate (%)"}, "domain": {"x": [0, 0.5], "y": [0.8, 1.0]}}, {"type": "indicator", "mode": "number", "value": 120, "title": {"text": "PnL Diario (USDT)"}, "domain": {"x": [0.5, 1.0], "y": [0.8, 1.0]}}, {"type": "table", "header": {"values": [["<b>Par</b>"], ["<b>Winrate</b>"]], "fill": {"color": "grey"}, "align": "center"}, "cells": {"values": [["BTC/USDT", "ETH/USDT", "SOL/USDT"], ["90%", "85%", "82%"]], "align": "center"}, "domain": {"x": [0, 1], "y": [0, 0.7]}}],                        {"template": {"data": {"indicator": [{"title": {"text": "Winrate"}, "mode": "number+delta+gauge"}]}}, "title": "Trading Statistics"}                    );                }            </script>        </div>
+</body>
+</html>
