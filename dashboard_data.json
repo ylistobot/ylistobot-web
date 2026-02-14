@@ -1,0 +1,38 @@
+{
+    "total_closed_trades": 131,
+    "win_rate": 77.1,
+    "pnl_diario": 0.0,
+    "pnl_semanal": 5.65,
+    "pair_ranking": [
+        {
+            "pair": "XRP/USDT",
+            "wins": 28,
+            "total": 33,
+            "win_rate": 84.84848484848484
+        },
+        {
+            "pair": "BNB/USDT",
+            "wins": 42,
+            "total": 52,
+            "win_rate": 80.76923076923077
+        },
+        {
+            "pair": "BTC/USDT",
+            "wins": 6,
+            "total": 8,
+            "win_rate": 75.0
+        },
+        {
+            "pair": "SOL/USDT",
+            "wins": 8,
+            "total": 12,
+            "win_rate": 66.66666666666666
+        },
+        {
+            "pair": "ETH/USDT",
+            "wins": 17,
+            "total": 26,
+            "win_rate": 65.38461538461539
+        }
+    ]
+}
