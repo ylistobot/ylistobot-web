@@ -57,7 +57,7 @@
         </section>
 
         <!-- Dashboard Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
             <div class="bg-panel p-6 rounded-2xl neon-border">
                 <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">Cantidad de Operaciones Cerradas</p>
                 <h3 id="total-trades" class="text-3xl font-bold neon-text font-mono">--</h3>
@@ -73,6 +73,10 @@
             <div class="bg-panel p-6 rounded-2xl neon-border">
                 <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Semanal</p>
                 <h3 id="weekly-pnl" class="text-3xl font-bold font-mono">0.00%</h3>
+            </div>
+            <div class="bg-panel p-6 rounded-2xl neon-border">
+                <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Mensual</p>
+                <h3 id="monthly-pnl" class="text-3xl font-bold font-mono">0.00%</h3>
             </div>
         </div>
 
@@ -189,7 +193,15 @@
                     el.className = `text-3xl font-bold font-mono ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
                 }
 
-                // 5. Ranking de Pares
+                // 5. PnL Mensual
+                if (data.pnl_mensual !== undefined) {
+                    const val = data.pnl_mensual;
+                    const el = document.getElementById('monthly-pnl');
+                    el.innerText = (val >= 0 ? '+' : '') + val.toFixed(2) + '%';
+                    el.className = `text-3xl font-bold font-mono ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
+                }
+
+                // 6. Ranking de Pares
                 if (data.pair_ranking && data.pair_ranking.length > 0) {
                     let html = '<table class="w-full text-left font-mono">';
                     html += `<thead class="text-gray-500 border-b border-gray-800 uppercase text-xs">
