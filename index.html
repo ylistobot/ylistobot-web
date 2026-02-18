@@ -98,6 +98,16 @@
             </div>
         </div>
 
+        <!-- PNL Mensual Table -->
+        <div class="bg-panel p-8 rounded-2xl mb-20">
+            <h2 class="text-2xl font-bold mb-8 neon-text flex items-center">
+                <i class="fas fa-calendar-alt mr-3"></i> PNL Mensual
+            </h2>
+            <div id="monthly-pnl-table-container" class="overflow-x-auto">
+                <!-- Table will be injected here -->
+            </div>
+        </div>
+
         <!-- Estrategia -->
         <section class="mb-20">
             <h2 class="text-4xl font-bold mb-12 text-center neon-text">Nuestra Estrategia Evolutiva</h2>
@@ -225,6 +235,38 @@
                     document.getElementById('ranking-container').innerHTML = html;
                 } else {
                     document.getElementById('ranking-container').innerHTML = '<p class="text-gray-500">No hay datos de ranking disponibles.</p>';
+                }
+
+                // 7. PNL Mensual Tabla
+                if (data.monthly_pnl && data.monthly_pnl.length > 0) {
+                    let html = '<table class="w-full text-left font-mono">';
+                    html += `<thead class="text-gray-500 border-b border-gray-800 uppercase text-xs">
+                                <tr>
+                                    <th class="py-4 px-2">Año</th>
+                                    <th class="py-4 px-2">Mes</th>
+                                    <th class="py-4 px-2 text-center">Operaciones</th>
+                                    <th class="py-4 px-2 text-right">PnL</th>
+                                </tr>
+                            </thead>`;
+                    html += '<tbody class="text-sm">';
+                    
+                    const monthNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+                    data.monthly_pnl.forEach(item => {
+                        const pnlClass = item.PnL >= 0 ? 'text-green-400' : 'text-red-400';
+                        const pnlSign = item.PnL >= 0 ? '+' : '';
+                        html += `<tr class="border-b border-gray-800/30 hover:bg-white/[0.02] transition">
+                                    <td class="py-4 px-2 font-bold">${item.año}</td>
+                                    <td class="py-4 px-2">${monthNames[item.mes - 1]}</td>
+                                    <td class="py-4 px-2 text-center">${item.Operaciones}</td>
+                                    <td class="py-4 px-2 text-right font-bold ${pnlClass}">${pnlSign}${item.PnL.toFixed(2)}%</td>
+                                 </tr>`;
+                    });
+
+                    html += '</tbody></table>';
+                    document.getElementById('monthly-pnl-table-container').innerHTML = html;
+                } else {
+                    document.getElementById('monthly-pnl-table-container').innerHTML = '<p class="text-gray-500">No hay datos de PNL mensual disponibles.</p>';
                 }
 
             } catch (e) {

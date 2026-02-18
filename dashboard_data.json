@@ -35,5 +35,31 @@
             "total": 26,
             "win_rate": 65.38461538461539
         }
+    ],
+    "monthly_pnl": [
+        {
+            "a\u00f1o": 2026.0,
+            "mes": 2.0,
+            "PnL": 9.13,
+            "Operaciones": 25
+        },
+        {
+            "a\u00f1o": 2026.0,
+            "mes": 1.0,
+            "PnL": 7.49,
+            "Operaciones": 34
+        },
+        {
+            "a\u00f1o": 2025.0,
+            "mes": 12.0,
+            "PnL": 8.33,
+            "Operaciones": 42
+        },
+        {
+            "a\u00f1o": 2025.0,
+            "mes": 11.0,
+            "PnL": 5.91,
+            "Operaciones": 33
+        }
     ]
 }
