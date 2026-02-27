@@ -1,9 +1,9 @@
 {
     "total_closed_trades": 158,
     "win_rate": 71.52,
-    "pnl_diario": 0.4,
-    "pnl_semanal": -5.38,
-    "pnl_mensual": 4.57,
+    "pnl_diario": 1.12,
+    "pnl_semanal": -4.33,
+    "pnl_mensual": 6.34,
     "pair_ranking": [
         {
             "pair": "BNB/USDT",
@@ -38,26 +38,26 @@
     ],
     "monthly_pnl": [
         {
-            "a\u00f1o": 2026,
-            "mes": 2,
-            "PnL": 4.57,
-            "Operaciones": 46
+            "a\u00f1o": 2026.0,
+            "mes": 2.0,
+            "PnL": 6.34,
+            "Operaciones": 44
         },
         {
-            "a\u00f1o": 2026,
-            "mes": 1,
+            "a\u00f1o": 2026.0,
+            "mes": 1.0,
             "PnL": 7.49,
             "Operaciones": 36
         },
         {
-            "a\u00f1o": 2025,
-            "mes": 12,
+            "a\u00f1o": 2025.0,
+            "mes": 12.0,
             "PnL": 9.27,
             "Operaciones": 43
         },
         {
-            "a\u00f1o": 2025,
-            "mes": 11,
+            "a\u00f1o": 2025.0,
+            "mes": 11.0,
             "PnL": 5.91,
             "Operaciones": 33
         }
