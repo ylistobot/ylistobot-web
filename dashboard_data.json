@@ -1,27 +1,21 @@
 {
-    "total_closed_trades": 138,
-    "win_rate": 76.81,
-    "pnl_diario": 0.42,
-    "pnl_semanal": 3.91,
-    "pnl_mensual": 9.55,
+    "total_closed_trades": 158,
+    "win_rate": 71.52,
+    "pnl_diario": 1.12,
+    "pnl_semanal": -4.33,
+    "pnl_mensual": 6.34,
     "pair_ranking": [
         {
-            "pair": "XRP/USDT",
-            "wins": 29,
-            "total": 35,
-            "win_rate": 82.85714285714286
-        },
-        {
             "pair": "BNB/USDT",
-            "wins": 43,
-            "total": 53,
-            "win_rate": 81.13207547169812
+            "wins": 46,
+            "total": 59,
+            "win_rate": 77.96610169491525
         },
         {
-            "pair": "BTC/USDT",
-            "wins": 8,
-            "total": 11,
-            "win_rate": 72.72727272727273
+            "pair": "XRP/USDT",
+            "wins": 30,
+            "total": 40,
+            "win_rate": 75.0
         },
         {
             "pair": "SOL/USDT",
@@ -32,28 +26,34 @@
         {
             "pair": "ETH/USDT",
             "wins": 17,
-            "total": 26,
-            "win_rate": 65.38461538461539
+            "total": 27,
+            "win_rate": 62.96296296296296
+        },
+        {
+            "pair": "BTC/USDT",
+            "wins": 11,
+            "total": 19,
+            "win_rate": 57.89473684210527
         }
     ],
     "monthly_pnl": [
         {
             "a\u00f1o": 2026.0,
             "mes": 2.0,
-            "PnL": 9.55,
-            "Operaciones": 26
+            "PnL": 6.34,
+            "Operaciones": 44
         },
         {
             "a\u00f1o": 2026.0,
             "mes": 1.0,
             "PnL": 7.49,
-            "Operaciones": 34
+            "Operaciones": 36
         },
         {
             "a\u00f1o": 2025.0,
             "mes": 12.0,
-            "PnL": 8.33,
-            "Operaciones": 42
+            "PnL": 9.27,
+            "Operaciones": 43
         },
         {
             "a\u00f1o": 2025.0,
