@@ -1,9 +1,9 @@
 {
     "total_closed_trades": 160,
     "win_rate": 70.0,
-    "pnl_diario": -1.7,
-    "pnl_semanal": -6.68,
-    "pnl_mensual": 1.66,
+    "pnl_diario": 0.0,
+    "pnl_semanal": -7.06,
+    "pnl_mensual": 0.0,
     "pair_ranking": [
         {
             "pair": "BNB/USDT",
