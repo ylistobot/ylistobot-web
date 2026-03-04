@@ -1,9 +1,9 @@
 {
-    "total_closed_trades": 176,
-    "win_rate": 65.34,
-    "pnl_diario": -7.02,
+    "total_closed_trades": 175,
+    "win_rate": 66.29,
+    "pnl_diario": -6.48,
     "pnl_semanal": -10.98,
-    "pnl_mensual": -7.02,
+    "pnl_mensual": -6.48,
     "pair_ranking": [
         {
             "pair": "BNB/USDT",
@@ -19,9 +19,9 @@
         },
         {
             "pair": "SOL/USDT",
-            "wins": 10,
-            "total": 16,
-            "win_rate": 62.5
+            "wins": 11,
+            "total": 17,
+            "win_rate": 64.70588235294117
         },
         {
             "pair": "ETH/USDT",
@@ -40,8 +40,8 @@
         {
             "a\u00f1o": 2026,
             "mes": 3,
-            "PnL": -7.02,
-            "Operaciones": 14
+            "PnL": -6.48,
+            "Operaciones": 13
         },
         {
             "a\u00f1o": 2026,
