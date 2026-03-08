@@ -1,6 +1,6 @@
 {
-    "total_closed_trades": 177,
-    "win_rate": 66.1,
+    "total_closed_trades": 178,
+    "win_rate": 65.73,
     "pnl_diario": 0.0,
     "pnl_semanal": -6.47,
     "pnl_mensual": -6.47,
@@ -41,7 +41,7 @@
             "a\u00f1o": 2026,
             "mes": 3,
             "PnL": -6.47,
-            "Operaciones": 15
+            "Operaciones": 16
         },
         {
             "a\u00f1o": 2026,
