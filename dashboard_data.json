@@ -1,9 +1,9 @@
 {
-    "total_closed_trades": 191,
-    "win_rate": 65.97,
-    "pnl_diario": 0.0,
+    "total_closed_trades": 192,
+    "win_rate": 65.62,
+    "pnl_diario": -0.66,
     "pnl_semanal": 1.05,
-    "pnl_mensual": -5.43,
+    "pnl_mensual": -6.08,
     "pair_ranking": [
         {
             "pair": "XRP/USDT",
@@ -14,8 +14,8 @@
         {
             "pair": "BNB/USDT",
             "wins": 48,
-            "total": 67,
-            "win_rate": 71.64179104477611
+            "total": 68,
+            "win_rate": 70.58823529411765
         },
         {
             "pair": "SOL/USDT",
@@ -40,8 +40,8 @@
         {
             "a\u00f1o": 2026,
             "mes": 3,
-            "PnL": -5.43,
-            "Operaciones": 29
+            "PnL": -6.08,
+            "Operaciones": 30
         },
         {
             "a\u00f1o": 2026,
