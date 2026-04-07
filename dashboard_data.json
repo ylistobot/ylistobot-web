@@ -1,9 +1,9 @@
 {
-    "total_closed_trades": 176,
-    "win_rate": 61.36,
-    "pnl_diario": -0.29,
+    "total_closed_trades": 177,
+    "win_rate": 61.58,
+    "pnl_diario": -0.09,
     "pnl_semanal": 0.0,
-    "pnl_mensual": -0.29,
+    "pnl_mensual": -0.09,
     "pair_ranking": [
         {
             "pair": "BNB/USDT",
@@ -19,9 +19,9 @@
         },
         {
             "pair": "XRP/USDT",
-            "wins": 23,
-            "total": 42,
-            "win_rate": 54.761904761904766
+            "wins": 24,
+            "total": 43,
+            "win_rate": 55.81395348837209
         },
         {
             "pair": "ETH/USDT",
@@ -40,8 +40,8 @@
         {
             "a\u00f1o": 2026,
             "mes": 4,
-            "PnL": -0.29,
-            "Operaciones": 3
+            "PnL": -0.09,
+            "Operaciones": 4
         },
         {
             "a\u00f1o": 2026,
