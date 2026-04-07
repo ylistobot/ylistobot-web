@@ -1,6 +1,6 @@
 {
     "total_closed_trades": 176,
-    "win_rate": 66.48,
+    "win_rate": 61.93,
     "pnl_diario": -0.54,
     "pnl_semanal": 0.0,
     "pnl_mensual": -0.54,
@@ -12,22 +12,22 @@
             "win_rate": 76.19047619047619
         },
         {
-            "pair": "XRP/USDT",
-            "wins": 29,
-            "total": 42,
-            "win_rate": 69.04761904761905
-        },
-        {
             "pair": "SOL/USDT",
             "wins": 10,
             "total": 15,
             "win_rate": 66.66666666666666
         },
         {
+            "pair": "XRP/USDT",
+            "wins": 23,
+            "total": 42,
+            "win_rate": 54.761904761904766
+        },
+        {
             "pair": "ETH/USDT",
-            "wins": 17,
+            "wins": 15,
             "total": 29,
-            "win_rate": 58.620689655172406
+            "win_rate": 51.724137931034484
         },
         {
             "pair": "BTC/USDT",
@@ -52,25 +52,25 @@
         {
             "a\u00f1o": 2026,
             "mes": 2,
-            "PnL": -0.49,
+            "PnL": -1328.86,
             "Operaciones": 50
         },
         {
             "a\u00f1o": 2026,
             "mes": 1,
-            "PnL": 7.49,
+            "PnL": 0.4,
             "Operaciones": 36
         },
         {
             "a\u00f1o": 2025,
             "mes": 12,
-            "PnL": 9.27,
+            "PnL": -755.29,
             "Operaciones": 43
         },
         {
             "a\u00f1o": 2025,
             "mes": 11,
-            "PnL": 5.91,
+            "PnL": 858.36,
             "Operaciones": 33
         }
     ]
