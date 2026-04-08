@@ -1,8 +1,8 @@
 {
     "total_closed_trades": 182,
     "win_rate": 60.44,
-    "pnl_diario": -1.68,
-    "pnl_semanal": 0.0,
+    "pnl_diario": 0.0,
+    "pnl_semanal": -1.68,
     "pnl_mensual": -1.68,
     "pair_ranking": [
         {
