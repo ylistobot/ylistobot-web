@@ -1,8 +1,8 @@
 {
-    "win_rate": 50.0,
-    "total_closed_trades": 6,
-    "pnl_diario": 1.99,
-    "pnl_semanal": 1.99,
-    "last_update": "2026-04-11T16:05:15.467841",
+    "win_rate": 37.5,
+    "total_closed_trades": 8,
+    "pnl_diario": 1.53,
+    "pnl_semanal": 1.53,
+    "last_update": "2026-04-11T16:06:19.456662",
     "status": "active"
 }
