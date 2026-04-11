@@ -1,9 +1,9 @@
 {
-    "total_closed_trades": 192,
-    "win_rate": 57.29,
-    "pnl_diario": 0.0,
+    "total_closed_trades": 193,
+    "win_rate": 57.51,
+    "pnl_diario": 0.3,
     "pnl_semanal": -3.84,
-    "pnl_mensual": -3.84,
+    "pnl_mensual": -3.54,
     "pair_ranking": [
         {
             "pair": "BNB/USDT",
@@ -31,17 +31,17 @@
         },
         {
             "pair": "BTC/USDT",
-            "wins": 12,
-            "total": 27,
-            "win_rate": 44.44444444444444
+            "wins": 13,
+            "total": 28,
+            "win_rate": 46.42857142857143
         }
     ],
     "monthly_pnl": [
         {
             "a\u00f1o": 2026,
             "mes": 4,
-            "PnL": -3.84,
-            "Operaciones": 19
+            "PnL": -3.54,
+            "Operaciones": 20
         },
         {
             "a\u00f1o": 2026,
