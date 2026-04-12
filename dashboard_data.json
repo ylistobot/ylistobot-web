@@ -1,10 +1,10 @@
 {
-    "win_rate": 0.0,
-    "total_closed_trades": 10,
-    "pnl_diario": -2.35,
-    "pnl_semanal": -2.35,
-    "pnl_historico": -2.35,
-    "last_update": "2026-04-12T01:53:49.344610",
-    "status": "active",
-    "pairs_active": 5
+    "win_rate": "0.0%",
+    "total_trades": 10,
+    "pnl_diario": "-2.35%",
+    "pnl_semanal": "-2.35%",
+    "pnl_historico": "-2.35%",
+    "last_update": "12/04/2026 01:54",
+    "status": "SISTEMA ACTIVO",
+    "active_pairs": 5
 }
