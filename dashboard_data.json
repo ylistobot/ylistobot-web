@@ -1,24 +1,24 @@
 {
-    "total_closed_trades": 2,
-    "win_rate": 50.0,
-    "pnl_diario": 0.10517704803085592,
-    "pnl_semanal": 0.10517704803085592,
-    "pnl_mensual": 0.10517704803085592,
+    "total_closed_trades": 3,
+    "win_rate": 0.0,
+    "pnl_diario": -1.00942285967276,
+    "pnl_semanal": -1.00942285967276,
+    "pnl_mensual": -1.00942285967276,
     "pair_ranking": [
         {
             "pair": "SOL/USDT",
-            "total": 2,
-            "win_rate": 50.0
+            "total": 3,
+            "win_rate": 0.0
         }
     ],
     "monthly_pnl": [
         {
             "a\u00f1o": 2026,
             "mes": 4,
-            "Operaciones": 2,
-            "PnL": 0.10517704803085592
+            "Operaciones": 3,
+            "PnL": -1.00942285967276
         }
     ],
-    "last_update": "14/04/2026 11:38",
+    "last_update": "14/04/2026 11:39",
     "status": "SISTEMA ACTIVO"
 }
