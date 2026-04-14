@@ -1,34 +1,24 @@
 {
-    "total_closed_trades": 4,
-    "win_rate": 25.0,
+    "total_closed_trades": 2,
+    "win_rate": 50.0,
     "pnl_diario": 0.10517704803085592,
-    "pnl_semanal": -0.5694868860135357,
-    "pnl_mensual": -0.5694868860135357,
+    "pnl_semanal": 0.10517704803085592,
+    "pnl_mensual": 0.10517704803085592,
     "pair_ranking": [
         {
             "pair": "SOL/USDT",
             "total": 2,
             "win_rate": 50.0
-        },
-        {
-            "pair": "BNB/USDT",
-            "total": 1,
-            "win_rate": 0.0
-        },
-        {
-            "pair": "BTC/USDT",
-            "total": 1,
-            "win_rate": 0.0
         }
     ],
     "monthly_pnl": [
         {
             "a\u00f1o": 2026,
             "mes": 4,
-            "Operaciones": 4,
-            "PnL": -0.5694868860135357
+            "Operaciones": 2,
+            "PnL": 0.10517704803085592
         }
     ],
-    "last_update": "14/04/2026 09:56",
+    "last_update": "14/04/2026 09:57",
     "status": "SISTEMA ACTIVO"
 }
