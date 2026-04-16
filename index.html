@@ -86,7 +86,7 @@
             <h2 class="text-2xl font-bold mb-6 neon-text flex items-center">
                 <i class="fas fa-broadcast-tower mr-3"></i> Radar del Sistema: Activos en Monitoreo
             </h2>
-            <div id="active-pairs-container" class="flex flex-wrap gap-3">
+            <div id="active-pairs-container" class="flex flex-wrap justify-center gap-2 sm:gap-3">
                 <p class="text-gray-500 animate-pulse">Sincronizando radares...</p>
             </div>
         </div>
@@ -229,7 +229,7 @@
                 if (data.active_pairs && data.active_pairs.length > 0) {
                     let pairsHtml = '';
                     data.active_pairs.forEach(pair => {
-                        pairsHtml += `<span class="px-4 py-2 rounded-lg bg-white/[0.03] border border-green-500/20 text-green-400 font-mono text-sm hover:border-green-500/50 transition cursor-default">
+                        pairsHtml += `<span class="flex-1 min-w-[120px] text-center px-3 py-2 rounded-lg bg-white/[0.03] border border-green-500/20 text-green-400 font-mono text-xs sm:text-sm hover:border-green-500/50 transition cursor-default shadow-lg shadow-green-500/5">
                                         <i class="fas fa-chart-line mr-2 opacity-50"></i>${pair}
                                       </span>`;
                     });
