@@ -6,6 +6,23 @@
     "pnl_mensual": 0.0,
     "pair_ranking": [],
     "monthly_pnl": [],
-    "last_update": "16/04/2026 13:37",
+    "active_pairs": [
+        "BTC/USDT",
+        "ETH/USDT",
+        "XRP/USDT",
+        "SOL/USDT",
+        "BNB/USDT",
+        "ADA/USDT",
+        "LINK/USDT",
+        "SUI/USDT",
+        "DOT/USDT",
+        "AVAX/USDT",
+        "NEAR/USDT",
+        "RENDER/USDT",
+        "INJ/USDT",
+        "LTC/USDT",
+        "APT/USDT"
+    ],
+    "last_update": "16/04/2026 13:38",
     "status": "SIN DATOS"
 }
