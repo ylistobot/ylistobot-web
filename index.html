@@ -68,15 +68,15 @@
             </div>
             <div class="bg-panel p-6 rounded-2xl neon-border">
                 <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Diario</p>
-                <h3 id="daily-pnl" class="text-3xl font-bold font-mono">0.00%</h3>
+                <h3 id="daily-pnl" class="text-3xl font-bold neon-text font-mono">0.00%</h3>
             </div>
             <div class="bg-panel p-6 rounded-2xl neon-border">
                 <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Semanal</p>
-                <h3 id="weekly-pnl" class="text-3xl font-bold font-mono">0.00%</h3>
+                <h3 id="weekly-pnl" class="text-3xl font-bold neon-text font-mono">0.00%</h3>
             </div>
             <div class="bg-panel p-6 rounded-2xl neon-border">
                 <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Mensual</p>
-                <h3 id="monthly-pnl" class="text-3xl font-bold font-mono">0.00%</h3>
+                <h3 id="monthly-pnl" class="text-3xl font-bold neon-text font-mono">0.00%</h3>
             </div>
         </div>
 
@@ -205,7 +205,7 @@
                     const val = data.pnl_diario;
                     const el = document.getElementById('daily-pnl');
                     el.innerText = (val >= 0 ? '+' : '') + val.toFixed(2) + '%';
-                    el.className = `text-3xl font-bold font-mono ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
+                    el.className = `text-3xl font-bold font-mono neon-text ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
                 }
 
                 // 4. PnL Semanal
@@ -213,7 +213,7 @@
                     const val = data.pnl_semanal;
                     const el = document.getElementById('weekly-pnl');
                     el.innerText = (val >= 0 ? '+' : '') + val.toFixed(2) + '%';
-                    el.className = `text-3xl font-bold font-mono ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
+                    el.className = `text-3xl font-bold font-mono neon-text ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
                 }
 
                 // 5. PnL Mensual
@@ -221,7 +221,7 @@
                     const val = data.pnl_mensual;
                     const el = document.getElementById('monthly-pnl');
                     el.innerText = (val >= 0 ? '+' : '') + val.toFixed(2) + '%';
-                    el.className = `text-3xl font-bold font-mono ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
+                    el.className = `text-3xl font-bold font-mono neon-text ${val >= 0 ? 'text-green-400' : 'text-red-400'}`;
                 }
 
                 
