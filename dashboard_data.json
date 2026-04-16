@@ -1,6 +1,6 @@
 {
-    "total_closed_trades": 4,
-    "win_rate": 25.0,
+    "total_closed_trades": 5,
+    "win_rate": 20.0,
     "pnl_diario": -0.08,
     "pnl_semanal": -0.24,
     "pnl_mensual": -0.24,
@@ -12,7 +12,7 @@
         },
         {
             "pair": "INJ/USDT",
-            "total": 2,
+            "total": 3,
             "win_rate": 0.0
         }
     ],
@@ -20,10 +20,10 @@
         {
             "a\u00f1o": 2026,
             "mes": 4,
-            "Operaciones": 4,
+            "Operaciones": 5,
             "PnL": -0.23992024846612303
         }
     ],
-    "last_update": "16/04/2026 06:03",
+    "last_update": "16/04/2026 06:04",
     "status": "SISTEMA ACTIVO"
 }
