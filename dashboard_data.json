@@ -21,7 +21,7 @@
             "a\u00f1o": 2026,
             "mes": 4,
             "Operaciones": 5,
-            "PnL": -122.73183078331569
+            "PnL": -122.73377291810083
         }
     ],
     "active_pairs": [
@@ -41,6 +41,6 @@
         "LTC/USDT",
         "BTC/USDT"
     ],
-    "last_update": "25/04/2026 18:35",
+    "last_update": "25/04/2026 18:36",
     "status": "SISTEMA ACTIVO"
 }
