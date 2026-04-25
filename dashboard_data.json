@@ -1,9 +1,9 @@
 {
     "total_closed_trades": 5,
     "win_rate": 20.0,
-    "pnl_diario": -122.73,
-    "pnl_semanal": -122.73,
-    "pnl_mensual": -122.73,
+    "pnl_diario": -122.77,
+    "pnl_semanal": -122.77,
+    "pnl_mensual": -122.77,
     "pair_ranking": [
         {
             "pair": "BTC/USDT",
@@ -21,7 +21,7 @@
             "a\u00f1o": 2026,
             "mes": 4,
             "Operaciones": 5,
-            "PnL": -122.73191405933788
+            "PnL": -122.7743406662098
         }
     ],
     "active_pairs": [
@@ -41,6 +41,6 @@
         "LTC/USDT",
         "BTC/USDT"
     ],
-    "last_update": "25/04/2026 18:56",
+    "last_update": "25/04/2026 18:57",
     "status": "SISTEMA ACTIVO"
 }
