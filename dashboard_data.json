@@ -1,11 +1,29 @@
 {
-    "total_closed_trades": 0,
+    "total_closed_trades": 2,
     "win_rate": 0.0,
-    "pnl_diario": 0.0,
-    "pnl_semanal": 0.0,
-    "pnl_mensual": 0.0,
-    "pair_ranking": [],
-    "monthly_pnl": [],
+    "pnl_diario": -0.36,
+    "pnl_semanal": -0.36,
+    "pnl_mensual": -0.36,
+    "pair_ranking": [
+        {
+            "pair": "BTC/USDT",
+            "total": 1,
+            "win_rate": 0.0
+        },
+        {
+            "pair": "ETH/USDT",
+            "total": 1,
+            "win_rate": 0.0
+        }
+    ],
+    "monthly_pnl": [
+        {
+            "a\u00f1o": 2026,
+            "mes": 4,
+            "Operaciones": 2,
+            "PnL": -0.36441312620214283
+        }
+    ],
     "active_pairs": [
         "APT/USDT",
         "ETH/USDT",
@@ -23,6 +41,6 @@
         "LTC/USDT",
         "BTC/USDT"
     ],
-    "last_update": "26/04/2026 00:35",
-    "status": "SIN DATOS"
+    "last_update": "26/04/2026 00:36",
+    "status": "SISTEMA ACTIVO"
 }
