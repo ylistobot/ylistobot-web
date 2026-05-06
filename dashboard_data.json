@@ -1,28 +1,127 @@
 {
-    "total_closed_trades": 0,
-    "win_rate": 0.0,
-    "pnl_diario": 0.0,
-    "pnl_semanal": 0.0,
-    "pnl_mensual": 0.0,
-    "pair_ranking": [],
-    "monthly_pnl": [],
-    "active_pairs": [
-        "APT/USDT",
-        "ETH/USDT",
-        "XRP/USDT",
-        "SOL/USDT",
-        "BNB/USDT",
-        "ADA/USDT",
-        "LINK/USDT",
-        "SUI/USDT",
-        "DOT/USDT",
-        "AVAX/USDT",
-        "NEAR/USDT",
-        "RENDER/USDT",
-        "INJ/USDT",
-        "LTC/USDT",
-        "BTC/USDT"
+    "trades": [
+        {
+            "date": "2026-05-04 22:13",
+            "pair": "AVAX/USDT",
+            "side": "SHORT",
+            "entry": 9.174,
+            "exit": 9.239,
+            "pnl": -0.71,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 19:43",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9374,
+            "exit": 0.9321,
+            "pnl": 0.56,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 18:20",
+            "pair": "AVAX/USDT",
+            "side": "SHORT",
+            "entry": 9.137,
+            "exit": 9.1925,
+            "pnl": -0.61,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 17:33",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9342,
+            "exit": 0.9306,
+            "pnl": 0.38,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 16:21",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9396,
+            "exit": 0.9369,
+            "pnl": 0.29,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 13:16",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9295,
+            "exit": 0.9252,
+            "pnl": 0.46,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 10:21",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9232,
+            "exit": 0.9279,
+            "pnl": -0.51,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 09:33",
+            "pair": "INJ/USDT",
+            "side": "SHORT",
+            "entry": 3.701,
+            "exit": 3.683,
+            "pnl": 0.49,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 08:22",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9478,
+            "exit": 0.9274,
+            "pnl": 2.16,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-04 06:38",
+            "pair": "AVAX/USDT",
+            "side": "SHORT",
+            "entry": 9.228,
+            "exit": 9.238,
+            "pnl": -0.11,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-03 22:14",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9205,
+            "exit": 0.9175,
+            "pnl": 0.33,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-01 04:25",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9171,
+            "exit": 0.9129,
+            "pnl": 0.46,
+            "reason": "manual_or_reconciliation"
+        },
+        {
+            "date": "2026-05-01 00:17",
+            "pair": "SUI/USDT",
+            "side": "SHORT",
+            "entry": 0.9108,
+            "exit": 0.9142,
+            "pnl": -0.37,
+            "reason": "manual_or_reconciliation"
+        }
     ],
-    "last_update": "01/05/2026 00:17",
-    "status": "SIN DATOS"
+    "summary": {
+        "total_trades": 13,
+        "win_rate": 61.5,
+        "total_pnl": 2.81,
+        "last_update": "2026-05-06 04:08 UTC"
+    }
 }
