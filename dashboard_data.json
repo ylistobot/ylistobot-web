@@ -1,7 +1,7 @@
 {
     "total_closed_trades": 10,
     "win_rate": 70.0,
-    "pnl_diario": 3.04,
+    "pnl_diario": 3.25,
     "pnl_semanal": 3.04,
     "pnl_mensual": 3.04,
     "pair_ranking": [
@@ -20,7 +20,7 @@
         "ADA/USDT",
         "LINK/USDT"
     ],
-    "last_update": "2026-05-10 03:36 UTC",
+    "last_update": "2026-05-10 03:37 UTC",
     "status": "SISTEMA ACTIVO",
     "trades": [
         {
@@ -118,6 +118,6 @@
         "total_trades": 10,
         "win_rate": 70.0,
         "total_pnl": 3.04,
-        "last_update": "2026-05-10 03:36 UTC"
+        "last_update": "2026-05-10 03:37 UTC"
     }
 }
