@@ -1,9 +1,9 @@
 {
-    "total_closed_trades": 11,
-    "win_rate": 63.6,
-    "pnl_diario": 2.72,
-    "pnl_semanal": 2.5,
-    "pnl_mensual": 2.5,
+    "total_closed_trades": 12,
+    "win_rate": 66.7,
+    "pnl_diario": 3.63,
+    "pnl_semanal": 3.41,
+    "pnl_mensual": 3.41,
     "pair_ranking": [
         {
             "pair": "ADA/USDT",
@@ -17,8 +17,8 @@
         },
         {
             "pair": "AVAX/USDT",
-            "total": 1,
-            "win_rate": 0.0
+            "total": 2,
+            "win_rate": 50.0
         }
     ],
     "active_pairs": [
@@ -29,6 +29,15 @@
     "last_update": "2026-05-10 10:04 UTC",
     "status": "SISTEMA ACTIVO",
     "trades": [
+        {
+            "date": "2026-05-10 07:04",
+            "pair": "AVAX/USDT",
+            "side": "short",
+            "entry": 10.047,
+            "exit": 9.956,
+            "pnl": 0.91,
+            "reason": "manual_or_reconciliation"
+        },
         {
             "date": "2026-05-10 04:02",
             "pair": "AVAX/USDT",
@@ -130,9 +139,9 @@
         }
     ],
     "summary": {
-        "total_trades": 11,
-        "win_rate": 63.6,
-        "total_pnl": 2.5,
+        "total_trades": 12,
+        "win_rate": 66.7,
+        "total_pnl": 3.41,
         "last_update": "2026-05-10 10:04 UTC"
     }
 }
