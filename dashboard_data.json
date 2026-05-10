@@ -20,7 +20,7 @@
         "ADA/USDT",
         "LINK/USDT"
     ],
-    "last_update": "2026-05-10 00:46 UTC",
+    "last_update": "2026-05-10 00:47 UTC",
     "status": "SISTEMA ACTIVO",
     "trades": [
         {
@@ -91,6 +91,6 @@
         "total_trades": 7,
         "win_rate": 57.1,
         "total_pnl": 2.34,
-        "last_update": "2026-05-10 00:46 UTC"
+        "last_update": "2026-05-10 00:47 UTC"
     }
 }
