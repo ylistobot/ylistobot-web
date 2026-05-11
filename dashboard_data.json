@@ -1,7 +1,7 @@
 {
     "total_closed_trades": 15,
     "win_rate": 53.3,
-    "pnl_diario": -1.09,
+    "pnl_diario": -0.56,
     "pnl_semanal": 1.95,
     "pnl_mensual": 1.95,
     "pair_ranking": [
@@ -26,7 +26,7 @@
         "AVAX/USDT",
         "LINK/USDT"
     ],
-    "last_update": "2026-05-11 04:02 UTC",
+    "last_update": "2026-05-11 04:03 UTC",
     "status": "SISTEMA ACTIVO",
     "trades": [
         {
@@ -169,6 +169,6 @@
         "total_trades": 15,
         "win_rate": 53.3,
         "total_pnl": 1.95,
-        "last_update": "2026-05-11 04:02 UTC"
+        "last_update": "2026-05-11 04:03 UTC"
     }
 }
