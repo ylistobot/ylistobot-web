@@ -1,9 +1,9 @@
 {
-    "total_closed_trades": 17,
-    "win_rate": 52.9,
-    "pnl_diario": 0.36,
-    "pnl_semanal": 0.36,
-    "pnl_mensual": 0.36,
+    "total_closed_trades": 18,
+    "win_rate": 50.0,
+    "pnl_diario": 0.32,
+    "pnl_semanal": -0.06,
+    "pnl_mensual": -0.06,
     "pair_ranking": [
         {
             "pair": "ADA/USDT",
@@ -16,12 +16,12 @@
             "win_rate": 50.0
         },
         {
-            "pair": "SOL/USDT",
-            "total": 2,
-            "win_rate": 50.0
+            "pair": "AVAX/USDT",
+            "total": 3,
+            "win_rate": 33.33
         },
         {
-            "pair": "AVAX/USDT",
+            "pair": "SOL/USDT",
             "total": 3,
             "win_rate": 33.33
         }
@@ -32,9 +32,18 @@
         "LINK/USDT",
         "SOL/USDT"
     ],
-    "last_update": "2026-07-13 21:18 UTC",
+    "last_update": "2026-07-14 07:07 UTC",
     "status": "SISTEMA ACTIVO",
     "trades": [
+        {
+            "date": "2026-07-14 04:07",
+            "pair": "SOL/USDT",
+            "side": "long",
+            "entry": 75.36,
+            "exit": 75.04,
+            "pnl": -0.42,
+            "reason": "manual_or_reconciliation"
+        },
         {
             "date": "2026-07-13 08:11",
             "pair": "SOL/USDT",
@@ -190,9 +199,9 @@
         }
     ],
     "summary": {
-        "total_trades": 17,
-        "win_rate": 52.9,
-        "total_pnl": 2.31,
-        "last_update": "2026-07-13 21:18 UTC"
+        "total_trades": 18,
+        "win_rate": 50.0,
+        "total_pnl": 1.88,
+        "last_update": "2026-07-14 07:07 UTC"
     }
 }
