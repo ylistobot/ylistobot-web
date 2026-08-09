@@ -1,8 +1,8 @@
 {
     "total_closed_trades": 21,
     "win_rate": 47.6,
-    "pnl_diario": -1.32,
-    "pnl_semanal": -0.56,
+    "pnl_diario": 0.0,
+    "pnl_semanal": 0.0,
     "pnl_mensual": -0.56,
     "pair_ranking": [
         {
@@ -32,7 +32,7 @@
         "LINK/USDT",
         "SOL/USDT"
     ],
-    "last_update": "2026-07-16 12:37 UTC",
+    "last_update": "2026-08-09 15:19 UTC",
     "status": "SISTEMA ACTIVO",
     "trades": [
         {
@@ -229,6 +229,6 @@
         "total_trades": 21,
         "win_rate": 47.6,
         "total_pnl": 1.38,
-        "last_update": "2026-07-16 12:37 UTC"
+        "last_update": "2026-08-09 15:19 UTC"
     }
 }
