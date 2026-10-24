@@ -2,7 +2,7 @@
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>YLISTOBOT — Renta Pasiva en Dólares con Grado Institucional (Delta-Neutral)</title>
     <meta name="description" content="Generador cuantitativo de rendimiento delta-neutral no custodial. Renta en dólares digitales operando directamente en tu cuenta de Binance sin riesgo direccional de mercado.">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,14 +18,36 @@
             --panel-bg: #0f172a;
             --card-border: rgba(255, 255, 255, 0.08);
         }
-        body {
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
             background-color: var(--dark-bg);
             color: #f1f5f9;
             font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
         }
         .font-mono {
             font-family: 'JetBrains Mono', monospace;
         }
+
+        /* Fluid Typography via clamp() */
+        h1, .fluid-h1 {
+            font-size: clamp(2rem, 5.5vw + 0.8rem, 4.25rem);
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+        }
+        h2, .fluid-h2 {
+            font-size: clamp(1.45rem, 3.2vw + 0.6rem, 2.5rem);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        h3, .fluid-h3 {
+            font-size: clamp(1.2rem, 2.2vw + 0.4rem, 1.75rem);
+            line-height: 1.25;
+        }
+
         .glow-cyan {
             text-shadow: 0 0 20px rgba(6, 182, 212, 0.45);
         }
@@ -41,212 +63,284 @@
             border-color: rgba(6, 182, 212, 0.3);
             box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15);
         }
+
+        /* Touch-Friendly Sliders: pan-y enables vertical page scroll while sliding */
         input[type="range"] {
             accent-color: #06b6d4;
+            touch-action: pan-y;
+        }
+
+        /* Preset buttons minimum touch-target size */
+        .preset-btn {
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        /* Vertical Timeline connect line */
+        .timeline-step {
+            position: relative;
+        }
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: 17px;
+            top: 40px;
+            bottom: -22px;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(6, 182, 212, 0.5), rgba(16, 185, 129, 0.15));
+        }
+        .timeline-step:last-child::before {
+            display: none;
+        }
+
+        .timeline-step-green {
+            position: relative;
+        }
+        .timeline-step-green::before {
+            content: '';
+            position: absolute;
+            left: 17px;
+            top: 40px;
+            bottom: -22px;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(16, 185, 129, 0.5), rgba(6, 182, 212, 0.15));
+        }
+        .timeline-step-green:last-child::before {
+            display: none;
+        }
+
+        /* Mobile bottom spacer for sticky CTA */
+        .pb-mobile-cta {
+            padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5.5rem);
         }
     </style>
 </head>
 <body class="min-h-screen selection:bg-cyan-500 selection:text-black">
 
     <!-- Top Notice Bar -->
-    <aside aria-label="Aviso de Seguridad" class="bg-gradient-to-r from-cyan-950/60 via-slate-900 to-emerald-950/60 border-b border-cyan-500/20 py-2.5 px-4 text-center text-xs font-medium text-cyan-300">
+    <aside aria-label="Aviso de Seguridad" class="bg-gradient-to-r from-cyan-950/70 via-slate-900 to-emerald-950/70 border-b border-cyan-500/20 py-2 px-3 sm:px-4 text-center text-xs font-medium text-cyan-300">
         <div class="container mx-auto flex items-center justify-center space-x-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">NO CUSTODIAL</span>
-            <span>Tus fondos nunca salen de tu billetera de Binance. Retiros desactivados por protocolo criptográfico.</span>
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 shrink-0">NO CUSTODIAL</span>
+            <span class="truncate sm:whitespace-normal">Tus fondos nunca salen de tu billetera Binance. Retiros desactivados por protocolo.</span>
         </div>
     </aside>
 
     <!-- Navigation Header -->
-    <header class="sticky top-0 z-50 card-glass border-b border-slate-800/80 px-6 py-4">
+    <header class="sticky top-0 z-40 card-glass border-b border-slate-800/80 px-4 sm:px-6 py-3 sm:py-4">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-cyan-500/20">
+            <div class="flex items-center space-x-2.5 sm:space-x-3">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-black font-black text-lg sm:text-xl shadow-lg shadow-cyan-500/20 shrink-0">
                     Y
                 </div>
                 <div>
-                    <span class="text-xl font-extrabold tracking-tight font-mono text-white">YLISTO<span class="text-cyan-400">BOT</span></span>
-                    <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">v4.2 SaaS Delta-Neutral</span>
+                    <span class="text-lg sm:text-xl font-extrabold tracking-tight font-mono text-white">YLISTO<span class="text-cyan-400">BOT</span></span>
+                    <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">v4.2 Delta-Neutral</span>
                 </div>
             </div>
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
-                <a href="#simulador" class="hover:text-cyan-400 transition">Calculadora de Renta</a>
+            <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium text-slate-300">
+                <a href="#simulador" class="hover:text-cyan-400 transition">Calculadora</a>
                 <a href="#alta-baja" class="hover:text-cyan-400 transition">Cómo Ingresar y Salir</a>
-                <a href="#gas-tank-libre" class="hover:text-cyan-400 transition">Gas Tank Saldo Libre</a>
+                <a href="#gas-tank-libre" class="hover:text-cyan-400 transition">Gas Tank Libre</a>
                 <a href="#seguridad" class="hover:text-cyan-400 transition">Seguridad y Riesgos</a>
             </nav>
-            <div class="flex items-center space-x-4">
-                <a href="https://t.me/ylisto_bot" target="_blank" class="bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 px-5 py-2.5 rounded-xl font-bold text-sm transition transform hover:scale-[1.02] shadow-lg shadow-cyan-500/20 flex items-center">
-                    <i class="fab fa-telegram mr-2 text-base"></i> Abrir en Telegram
+            <div class="flex items-center space-x-3">
+                <a href="https://t.me/ylisto_bot" target="_blank" class="bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition transform hover:scale-[1.02] shadow-lg shadow-cyan-500/20 flex items-center min-h-[40px] sm:min-h-[44px]">
+                    <i class="fab fa-telegram mr-1.5 sm:mr-2 text-sm sm:text-base"></i> Abrir en Telegram
                 </a>
             </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12 md:py-20">
+    <main class="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-20 pb-mobile-cta md:pb-20">
 
         <!-- Hero Section -->
-        <section class="text-center max-w-4xl mx-auto mb-20 md:mb-28">
-            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-8">
-                <i class="fas fa-shield-halved text-sm"></i>
-                <span>Arquitectura Delta-Neutral (&Delta; = 0) &bull; Zero Market Risk &bull; No Custodial</span>
+        <section class="text-center max-w-4xl mx-auto mb-16 sm:mb-20 md:mb-28">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-semibold uppercase tracking-wider mb-6 sm:mb-8 max-w-full">
+                <i class="fas fa-shield-halved text-xs shrink-0"></i>
+                <span class="truncate sm:whitespace-normal">Arquitectura Delta-Neutral (&Delta; = 0) &bull; Zero Market Risk &bull; No Custodial</span>
             </div>
-            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8">
+
+            <h1 class="fluid-h1 font-extrabold tracking-tight mb-6 sm:mb-8 text-white">
                 Renta Pasiva en Dólares con <br>
                 <span class="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent glow-cyan">
                     Grado Institucional
                 </span>
             </h1>
-            <p class="text-lg sm:text-2xl text-slate-300 font-light leading-relaxed mb-6">
+
+            <p class="text-base sm:text-xl md:text-2xl text-slate-300 font-light leading-relaxed mb-5 max-w-3xl mx-auto">
                 Estrategia cuantitativa con objetivo algorítmico de <strong class="text-emerald-400 font-semibold">10% a 14% APR</strong> en dólares digitales (USDT) sin exposición a caídas o subidas de Bitcoin.
             </p>
-            <p class="text-sm sm:text-base text-slate-400 max-w-3xl mx-auto mb-8 leading-normal">
+            <p class="text-xs sm:text-sm md:text-base text-slate-400 max-w-3xl mx-auto mb-8 leading-relaxed">
                 Arbitraje de tasas de financiamiento (Cash & Carry a 4x con salvaguarda Auto Margin Top-Up) ejecutado en tiempo real en tu propia cuenta de Binance mediante API keys no custodiales. <span class="text-slate-200 font-medium">Tus fondos jamás abandonan tu exchange.</span>
             </p>
 
-            <!-- Quantitative Telemetry Pill -->
-            <div class="inline-flex flex-wrap items-center justify-center gap-3 bg-slate-900/90 border border-cyan-500/30 px-5 py-3 rounded-2xl mb-10 text-xs font-mono text-slate-300 shadow-xl">
-                <span class="flex items-center text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2"></span> TELEMETRÍA EN VIVO:</span>
-                <span>APR Total Equity: <strong class="text-cyan-400 font-bold" id="hero-live-apr">2.27%</strong></span>
-                <span class="text-slate-600">|</span>
-                <span>APR Nocional Corto: <strong class="text-emerald-400 font-bold" id="hero-live-short-apr">10.00%</strong></span>
-                <span class="text-slate-600">|</span>
-                <span>Fondeos Positivos: <strong class="text-white">&gt;98.4%</strong></span>
-                <span class="text-slate-600">|</span>
-                <span>Riesgo Direccional: <strong class="text-emerald-400">&Delta; = 0.00</strong></span>
+            <!-- Responsive Quantitative Telemetry Grid (Mobile-First) -->
+            <div class="w-full max-w-3xl mx-auto mb-10">
+                <div class="flex items-center justify-center space-x-2 mb-3">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
+                    <span class="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">Telemetría en Vivo de Producción</span>
+                    <span class="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">BINANCE FAPI 4X</span>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 text-left font-mono">
+                    <div class="bg-slate-900/90 border border-cyan-500/30 p-3 sm:p-3.5 rounded-xl shadow-lg">
+                        <span class="text-[10px] text-slate-400 uppercase block mb-1">APR Total Equity</span>
+                        <div class="text-lg sm:text-xl font-extrabold text-cyan-400" id="hero-live-apr">5.73%</div>
+                        <span class="text-[9px] text-slate-500 block truncate">ROE sobre Capital Real</span>
+                    </div>
+                    <div class="bg-slate-900/90 border border-emerald-500/30 p-3 sm:p-3.5 rounded-xl shadow-lg">
+                        <span class="text-[10px] text-slate-400 uppercase block mb-1">APR Nocional Corto</span>
+                        <div class="text-lg sm:text-xl font-extrabold text-emerald-400" id="hero-live-short-apr">10.95%</div>
+                        <span class="text-[9px] text-slate-500 block truncate">Tasa Fondeo Anualizada</span>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-800 p-3 sm:p-3.5 rounded-xl shadow-lg">
+                        <span class="text-[10px] text-slate-400 uppercase block mb-1">Fondeos Positivos</span>
+                        <div class="text-lg sm:text-xl font-extrabold text-white">&gt;98.4%</div>
+                        <span class="text-[9px] text-emerald-400 block truncate">Cobro cada 4 u 8h</span>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-800 p-3 sm:p-3.5 rounded-xl shadow-lg">
+                        <span class="text-[10px] text-slate-400 uppercase block mb-1">Riesgo Mercado</span>
+                        <div class="text-lg sm:text-xl font-extrabold text-emerald-400">&Delta; = 0.00</div>
+                        <span class="text-[9px] text-slate-500 block truncate">Cobertura Simétrica</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#simulador" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-base font-bold px-8 py-4 rounded-xl shadow-xl shadow-cyan-500/20 transition transform hover:-translate-y-0.5">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
+                <a href="#simulador" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-sm sm:text-base font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-xl shadow-cyan-500/20 transition transform hover:-translate-y-0.5 min-h-[48px] flex items-center justify-center">
                     <i class="fas fa-calculator mr-2"></i> Simular Mi Rendimiento
                 </a>
-                <a href="#alta-baja" class="w-full sm:w-auto card-glass hover:bg-slate-800/80 text-white text-base font-semibold px-8 py-4 rounded-xl transition border border-slate-700">
+                <a href="#alta-baja" class="w-full sm:w-auto card-glass hover:bg-slate-800/80 text-white text-sm sm:text-base font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition border border-slate-700 min-h-[48px] flex items-center justify-center">
                     <i class="fas fa-door-open mr-2 text-cyan-400"></i> Cómo Ingresar y Salir
                 </a>
             </div>
         </section>
 
         <!-- KPI Metrics Grid -->
-        <section aria-label="Métricas de Rendimiento" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-20 md:mb-28">
-            <div class="card-glass p-6 rounded-2xl">
-                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Objetivo Algorítmico</span>
-                <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400 font-mono">10% – 14%</div>
-                <p class="text-slate-400 text-xs mt-2">APR Neto objetivo a plena asignación</p>
+        <section aria-label="Métricas de Rendimiento" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-16 sm:mb-20 md:mb-28">
+            <div class="card-glass p-4 sm:p-6 rounded-2xl">
+                <span class="text-slate-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block mb-1">Objetivo Algorítmico</span>
+                <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-cyan-400 font-mono">10% – 14%</div>
+                <p class="text-slate-400 text-[11px] sm:text-xs mt-1.5 leading-snug">APR Neto objetivo a plena asignación</p>
             </div>
-            <div class="card-glass p-6 rounded-2xl">
-                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Consistencia Histórica</span>
-                <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono">&gt;98.4%</div>
-                <p class="text-slate-400 text-xs mt-2">Cortes de fondeo positivos cobrados</p>
+            <div class="card-glass p-4 sm:p-6 rounded-2xl">
+                <span class="text-slate-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block mb-1">Consistencia Histórica</span>
+                <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-emerald-400 font-mono">&gt;98.4%</div>
+                <p class="text-slate-400 text-[11px] sm:text-xs mt-1.5 leading-snug">Cortes de fondeo positivos cobrados</p>
             </div>
-            <div class="card-glass p-6 rounded-2xl">
-                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Riesgo Direccional</span>
-                <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono">&Delta; = 0.00</div>
-                <p class="text-slate-400 text-xs mt-2">Cobertura simétrica Spot/Futuros</p>
+            <div class="card-glass p-4 sm:p-6 rounded-2xl">
+                <span class="text-slate-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block mb-1">Riesgo Direccional</span>
+                <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white font-mono">&Delta; = 0.00</div>
+                <p class="text-slate-400 text-[11px] sm:text-xs mt-1.5 leading-snug">Cobertura simétrica Spot/Futuros</p>
             </div>
-            <div class="card-glass p-6 rounded-2xl">
-                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Modelo Comercial</span>
-                <div class="text-3xl sm:text-4xl font-extrabold text-cyan-300 font-mono">15% Fee</div>
-                <p class="text-slate-400 text-xs mt-2">Saldo Libre: No Profit = No Fee</p>
+            <div class="card-glass p-4 sm:p-6 rounded-2xl">
+                <span class="text-slate-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider block mb-1">Modelo Comercial</span>
+                <div class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-cyan-300 font-mono">15% Fee</div>
+                <p class="text-slate-400 text-[11px] sm:text-xs mt-1.5 leading-snug">Saldo Libre: No Profit = No Fee</p>
             </div>
         </section>
 
         <!-- Interactive Calculator Section -->
-        <section id="simulador" class="card-glass p-8 sm:p-12 md:p-16 rounded-[2.5rem] border border-cyan-500/20 mb-20 md:mb-28 relative overflow-hidden shadow-2xl">
+        <section id="simulador" class="card-glass p-5 sm:p-8 md:p-12 lg:p-16 rounded-3xl md:rounded-[2.5rem] border border-cyan-500/20 mb-16 sm:mb-20 md:mb-28 relative overflow-hidden shadow-2xl">
             <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-10">
+                <div class="text-center mb-8 sm:mb-10">
                     <span class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Simulador Cuantitativo Interactivo</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Calcula tu Flujo de Caja Pasivo</h2>
-                    <p class="text-slate-400 text-sm sm:text-base mt-2">Proyecta el rendimiento de tu capital bajo el modelo institucional y compáralo con instrumentos tradicionales.</p>
+                    <h2 class="fluid-h2 font-bold tracking-tight text-white">Calcula tu Flujo de Caja Pasivo</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm md:text-base mt-2 max-w-2xl mx-auto">Proyecta el rendimiento de tu capital bajo el modelo institucional y compáralo con instrumentos tradicionales.</p>
                 </div>
 
                 <!-- Slider Card -->
-                <div class="bg-slate-900/90 p-6 sm:p-8 rounded-2xl border border-slate-800 mb-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <label for="capital-slider" class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Capital Desplegado en Binance:</label>
-                        <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono bg-cyan-950/60 px-4 py-1.5 rounded-xl border border-cyan-500/30">
+                <div class="bg-slate-900/90 p-5 sm:p-7 md:p-8 rounded-2xl border border-slate-800 mb-6 sm:mb-8">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+                        <label for="capital-slider" class="text-xs sm:text-sm font-semibold text-slate-300 uppercase tracking-wider">Capital Desplegado en Binance:</label>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono bg-cyan-950/60 px-3.5 py-1.5 rounded-xl border border-cyan-500/30">
                             $<span id="capital-display">5,000</span> <span class="text-xs text-slate-400">USDT</span>
                         </div>
                     </div>
                     <input type="range" id="capital-slider" min="500" max="50000" step="500" value="5000" class="w-full h-3 bg-slate-800 rounded-lg cursor-pointer">
-                    <div class="flex justify-between text-xs text-slate-500 font-mono mt-2">
-                        <span>$500 USDT</span>
-                        <span>$10,000 USDT</span>
-                        <span>$25,000 USDT</span>
-                        <span>$50,000 USDT</span>
+                    <div class="flex justify-between text-[10px] sm:text-xs text-slate-500 font-mono mt-2">
+                        <span>$500</span>
+                        <span>$10,000</span>
+                        <span>$25,000</span>
+                        <span>$50,000</span>
                     </div>
                 </div>
 
                 <!-- Mode Selector -->
-                <div class="flex justify-center mb-8">
-                    <div class="inline-flex p-1 bg-slate-950 rounded-xl border border-slate-800">
-                        <button id="btn-mode-target" class="px-5 py-2 rounded-lg text-xs font-bold transition bg-cyan-500 text-black">
+                <div class="flex justify-center mb-6 sm:mb-8">
+                    <div class="inline-flex flex-col sm:flex-row p-1 bg-slate-950 rounded-xl border border-slate-800 w-full sm:w-auto">
+                        <button id="btn-mode-target" class="px-4 py-2.5 rounded-lg text-xs font-bold transition bg-cyan-500 text-black min-h-[40px] sm:min-h-0">
                             Objetivo Institucional (10.2% Neto)
                         </button>
-                        <button id="btn-mode-live" class="px-5 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">
-                            Rendimiento en Vivo Actual (~3.0% Neto)
+                        <button id="btn-mode-live" class="px-4 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition min-h-[40px] sm:min-h-0 mt-1 sm:mt-0">
+                            Rendimiento en Vivo Actual (~4.9% Neto)
                         </button>
                     </div>
                 </div>
 
                 <!-- Live Results Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-center">
-                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 mb-8 sm:mb-10 text-center">
+                    <div class="bg-slate-900/60 p-4 sm:p-6 rounded-2xl border border-slate-800">
                         <span class="text-slate-400 text-xs uppercase font-semibold block mb-1">Rendimiento por Día</span>
                         <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">+$<span id="daily-net">1.40</span> <span class="text-xs">USDT</span></div>
-                        <span class="text-[11px] text-slate-500">Cobrado cada 4 u 8 horas</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">Cobrado cada 4 u 8 horas</span>
                     </div>
-                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
+                    <div class="bg-slate-900/60 p-4 sm:p-6 rounded-2xl border border-slate-800">
                         <span class="text-slate-400 text-xs uppercase font-semibold block mb-1">Rendimiento por Mes</span>
                         <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">+$<span id="monthly-net">42.50</span> <span class="text-xs">USDT</span></div>
-                        <span class="text-[11px] text-slate-500">Flujo neto a tu billetera</span>
+                        <span class="text-[11px] text-slate-500 block mt-1">Flujo neto a tu billetera</span>
                     </div>
-                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-cyan-950/20 to-slate-900">
+                    <div class="bg-slate-900/60 p-4 sm:p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-cyan-950/20 to-slate-900">
                         <span class="text-cyan-400 text-xs uppercase font-bold block mb-1">Rendimiento Anual Neto</span>
                         <div class="text-2xl sm:text-3xl font-extrabold text-cyan-300 font-mono">+$<span id="annual-net">510.00</span> <span class="text-xs">USDT</span></div>
-                        <span class="text-[11px] text-emerald-400 font-semibold font-mono" id="label-net-apr">10.20% APR Neto</span>
+                        <span class="text-[11px] text-emerald-400 font-semibold font-mono block mt-1" id="label-net-apr">10.20% APR Neto</span>
                     </div>
                 </div>
 
                 <!-- Benchmarking Comparison Table -->
-                <div class="bg-slate-950/80 p-6 rounded-2xl border border-slate-800/80">
+                <div class="bg-slate-950/80 p-4 sm:p-6 rounded-2xl border border-slate-800/80 mb-8">
                     <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 text-center">Comparativa Frente a Otras Alternativas en Dólares</h3>
                     <div class="space-y-3">
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/30 gap-2">
                             <div class="flex items-center space-x-3">
-                                <i class="fas fa-bolt text-cyan-400 text-lg"></i>
+                                <i class="fas fa-bolt text-cyan-400 text-lg shrink-0"></i>
                                 <div>
                                     <div class="text-sm font-bold text-white">YlistoBot Sweet Spot (Delta-Neutral)</div>
                                     <div class="text-xs text-slate-400" id="cmp-desc-ylisto">10.20% APR Neto &bull; Custodia propia &bull; Liquidez inmediata</div>
                                 </div>
                             </div>
-                            <div class="text-right">
+                            <div class="text-left sm:text-right pl-7 sm:pl-0">
                                 <div class="text-base sm:text-lg font-bold font-mono text-cyan-300">+$<span id="cmp-ylisto">510.00</span></div>
                                 <div class="text-[10px] text-emerald-400 font-semibold font-mono" id="cmp-apr-ylisto">+10.20% APR</div>
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/40 border border-slate-800">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 rounded-xl bg-slate-900/40 border border-slate-800 gap-2">
                             <div class="flex items-center space-x-3">
-                                <i class="fas fa-coins text-amber-400 text-lg"></i>
+                                <i class="fas fa-coins text-amber-400 text-lg shrink-0"></i>
                                 <div>
                                     <div class="text-sm font-medium text-slate-300">Binance Simple Earn Flexible</div>
                                     <div class="text-xs text-slate-500">~6.00% APR &bull; Tasas decrecientes con capital mayor a $1,000</div>
                                 </div>
                             </div>
-                            <div class="text-right">
+                            <div class="text-left sm:text-right pl-7 sm:pl-0">
                                 <div class="text-base sm:text-lg font-bold font-mono text-slate-400">+$<span id="cmp-binance">300.00</span></div>
                                 <div class="text-[10px] text-slate-500 font-mono">6.00% APR</div>
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/40 border border-slate-800">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3.5 rounded-xl bg-slate-900/40 border border-slate-800 gap-2">
                             <div class="flex items-center space-x-3">
-                                <i class="fas fa-landmark text-blue-400 text-lg"></i>
+                                <i class="fas fa-landmark text-blue-400 text-lg shrink-0"></i>
                                 <div>
                                     <div class="text-sm font-medium text-slate-300">Bonos del Tesoro USA (T-Bills) / Plazo Fijo USD</div>
                                     <div class="text-xs text-slate-500">~4.50% APR &bull; Retenciones impositivas, comisiones de broker e iliquidez</div>
                                 </div>
                             </div>
-                            <div class="text-right">
+                            <div class="text-left sm:text-right pl-7 sm:pl-0">
                                 <div class="text-base sm:text-lg font-bold font-mono text-slate-400">+$<span id="cmp-tbills">225.00</span></div>
                                 <div class="text-[10px] text-slate-500 font-mono">4.50% APR</div>
                             </div>
@@ -254,53 +348,56 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-8">
-                    <a href="https://t.me/ylisto_bot" target="_blank" class="inline-block bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold px-10 py-4 rounded-xl shadow-lg transition">
+                <div class="text-center">
+                    <a href="https://t.me/ylisto_bot" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl shadow-lg transition min-h-[48px]">
                         Solicitar Acceso en Telegram <i class="fab fa-telegram ml-2"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Transparency Section: How to Enter and How to Exit -->
-        <section id="alta-baja" class="mb-20 md:mb-28">
-            <div class="text-center max-w-2xl mx-auto mb-16">
+        <!-- Transparency Section: How to Enter and How to Exit (Vertical Timeline) -->
+        <section id="alta-baja" class="mb-16 sm:mb-20 md:mb-28">
+            <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
                 <span class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Transparencia Radical</span>
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">¿Cómo Ingresar y Cómo Salir?</h2>
-                <p class="text-slate-400 text-sm sm:text-base mt-2">Flexibilidad total. Sin letra chica, sin plazos forzosos y con control absoluto de tus fondos.</p>
+                <h2 class="fluid-h2 font-bold tracking-tight text-white">¿Cómo Ingresar y Cómo Salir?</h2>
+                <p class="text-slate-400 text-xs sm:text-sm md:text-base mt-2">Flexibilidad total. Sin letra chica, sin plazos forzosos y con control absoluto de tus fondos.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <!-- Columna Alta: Cómo Ingresar -->
-                <div class="card-glass p-8 sm:p-10 rounded-3xl border border-cyan-500/30 flex flex-col justify-between">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                <!-- Columna Alta: Cómo Ingresar (Timeline) -->
+                <div class="card-glass p-5 sm:p-8 md:p-10 rounded-3xl border border-cyan-500/30 flex flex-col justify-between">
                     <div>
                         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6">
                             <i class="fas fa-arrow-right-to-bracket"></i>
                             <span>ALTA TRANSPARENTE EN 3 PASOS</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-6">Comenzar a Generar Rendimiento</h3>
+                        <h3 class="fluid-h3 font-bold text-white mb-6">Comenzar a Generar Rendimiento</h3>
                         
                         <div class="space-y-6 text-sm text-slate-300">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold font-mono text-sm shrink-0 mt-0.5">1</div>
+                            <!-- Timeline Step 1 -->
+                            <div class="timeline-step relative pl-11 sm:pl-12">
+                                <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">1</div>
                                 <div>
-                                    <strong class="text-white block mb-1">Conectas tu API de Binance Sin Retiros</strong>
-                                    <p class="text-slate-400 text-xs leading-relaxed">Creas tu API Key activando lectura y trading (Spot + Futuros). <span class="text-cyan-300 font-semibold">Desmarcas 'Enable Withdrawals'.</span> El sistema rechaza criptográficamente cualquier key que intente retiros.</p>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Conectas tu API de Binance Sin Retiros</strong>
+                                    <p class="text-slate-400 text-xs leading-relaxed">Creas tu API Key activando lectura y trading (Spot + Futuros). <span class="text-cyan-300 font-semibold">Desmarcas 'Enable Withdrawals'.</span> El sistema rechaza criptográficamente cualquier key con permisos de retiro.</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-start space-x-4">
-                                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold font-mono text-sm shrink-0 mt-0.5">2</div>
+                            <!-- Timeline Step 2 -->
+                            <div class="timeline-step relative pl-11 sm:pl-12">
+                                <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">2</div>
                                 <div>
-                                    <strong class="text-white block mb-1">Cargas tu Gas Tank Libre (Mínimo $20 USDT)</strong>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Cargas tu Gas Tank Libre (Piso $20 USDT)</strong>
                                     <p class="text-slate-400 text-xs leading-relaxed">Sin paquetes rígidos: recargas el monto que prefieras. Tus fondos de inversión quedan 100% en Binance; el Gas Tank solo abona el 15% sobre utilidades reales devengadas.</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-start space-x-4">
-                                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold font-mono text-sm shrink-0 mt-0.5">3</div>
+                            <!-- Timeline Step 3 -->
+                            <div class="timeline-step relative pl-11 sm:pl-12">
+                                <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">3</div>
                                 <div>
-                                    <strong class="text-white block mb-1">Monitoreo Pasivo y Cobro Periódico</strong>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Monitoreo Pasivo y Cobro Periódico</strong>
                                     <p class="text-slate-400 text-xs leading-relaxed">El bot despliega la cobertura delta-neutral (&Delta; = 0). Cobras fondeos cada 4 u 8 horas en tu exchange y consultas tu balance con <code class="text-emerald-400 font-mono">/balance</code> en Telegram.</p>
                                 </div>
                             </div>
@@ -308,42 +405,45 @@
                     </div>
 
                     <div class="mt-8 pt-6 border-t border-slate-800">
-                        <a href="https://t.me/ylisto_bot" target="_blank" class="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl text-center text-sm transition flex items-center justify-center shadow-lg">
+                        <a href="https://t.me/ylisto_bot" target="_blank" class="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl text-center text-xs sm:text-sm transition flex items-center justify-center shadow-lg min-h-[48px]">
                             <i class="fab fa-telegram mr-2"></i> Darme de Alta en Telegram
                         </a>
                     </div>
                 </div>
 
-                <!-- Columna Baja: Cómo Salir -->
-                <div class="card-glass p-8 sm:p-10 rounded-3xl border border-emerald-500/30 flex flex-col justify-between">
+                <!-- Columna Baja: Cómo Salir (Timeline) -->
+                <div class="card-glass p-5 sm:p-8 md:p-10 rounded-3xl border border-emerald-500/30 flex flex-col justify-between">
                     <div>
                         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
                             <i class="fas fa-arrow-right-from-bracket"></i>
                             <span>BAJA INMEDIATA Y SIN PENALIZACIÓN</span>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-6">Desarmar y Volver a USDT Líquido</h3>
+                        <h3 class="fluid-h3 font-bold text-white mb-6">Desarmar y Volver a USDT Líquido</h3>
                         
                         <div class="space-y-6 text-sm text-slate-300">
-                            <div class="flex items-start space-x-4">
-                                <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono text-sm shrink-0 mt-0.5">1</div>
+                            <!-- Timeline Step 1 -->
+                            <div class="timeline-step-green relative pl-11 sm:pl-12">
+                                <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">1</div>
                                 <div>
-                                    <strong class="text-white block mb-1">Escribes el Comando /desarmar</strong>
-                                    <p class="text-slate-400 text-xs leading-relaxed">En cualquier segundo, envías <code class="text-cyan-400 font-mono">/desarmar</code> al bot de Telegram o simplemente eliminas la clave API desde tu panel de control de Binance.</p>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Escribes el Comando /desarmar</strong>
+                                    <p class="text-slate-400 text-xs leading-relaxed">En cualquier momento, envías <code class="text-cyan-400 font-mono">/desarmar</code> al bot de Telegram o simplemente eliminas la clave API desde tu panel de control de Binance.</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-start space-x-4">
-                                <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono text-sm shrink-0 mt-0.5">2</div>
+                            <!-- Timeline Step 2 -->
+                            <div class="timeline-step-green relative pl-11 sm:pl-12">
+                                <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">2</div>
                                 <div>
-                                    <strong class="text-white block mb-1">Desarme Simétrico al Milisegundo</strong>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Desarme Simétrico al Milisegundo</strong>
                                     <p class="text-slate-400 text-xs leading-relaxed">El algoritmo cierra de inmediato y en simultáneo la pata Spot y la pata Futuros a precio de mercado, eliminando cualquier exposición remanente.</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-start space-x-4">
-                                <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono text-sm shrink-0 mt-0.5">3</div>
+                            <!-- Timeline Step 3 -->
+                            <div class="timeline-step-green relative pl-11 sm:pl-12">
+                                <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">3</div>
                                 <div>
-                                    <strong class="text-white block mb-1">100% USDT Líquido en tu Cuenta</strong>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">100% USDT Líquido en tu Cuenta</strong>
                                     <p class="text-slate-400 text-xs leading-relaxed">Tus fondos quedan 100% líquidos en tu Binance. <strong class="text-emerald-400">Cero comisiones de salida, cero penalizaciones y cero permanencia obligatoria.</strong> La custodia siempre fue tuya.</p>
                                 </div>
                             </div>
@@ -360,66 +460,66 @@
         </section>
 
         <!-- Free Gas Tank Model Section -->
-        <section id="gas-tank-libre" class="card-glass p-8 sm:p-12 md:p-16 rounded-[2.5rem] border border-cyan-500/20 mb-20 md:mb-28">
+        <section id="gas-tank-libre" class="card-glass p-5 sm:p-8 md:p-12 lg:p-16 rounded-3xl md:rounded-[2.5rem] border border-cyan-500/20 mb-16 sm:mb-20 md:mb-28">
             <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
+                <div class="text-center mb-8 sm:mb-12">
                     <span class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Alineación 100% Win-Win</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Gas Tank de Saldo Libre</h2>
-                    <p class="text-slate-400 text-sm sm:text-base mt-2">Erradicamos los planes rígidos: recargas exactamente el monto que desees con un piso mínimo de $20 USDT.</p>
-                    <div class="mt-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        <i class="fas fa-hand-holding-dollar mr-1.5"></i> Regla Inviolable: No Profit = No Fee (Solo pagas 15% sobre utilidades reales)
+                    <h2 class="fluid-h2 font-bold tracking-tight text-white">Gas Tank de Saldo Libre</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm md:text-base mt-2 max-w-2xl mx-auto">Erradicamos los planes rígidos: recargas exactamente el monto que desees con un piso mínimo de $20 USDT.</p>
+                    <div class="mt-4 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 max-w-full">
+                        <i class="fas fa-hand-holding-dollar mr-1.5 shrink-0"></i> <span class="truncate sm:whitespace-normal">Regla Inviolable: No Profit = No Fee (15% sobre utilidades reales)</span>
                     </div>
                 </div>
 
                 <!-- Interactive Gas Tank Calculator Widget -->
-                <div class="bg-slate-900/90 p-8 rounded-3xl border border-slate-800 mb-8 shadow-xl">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <div class="bg-slate-900/90 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-slate-800 mb-8 shadow-xl">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
                         <div>
-                            <span class="text-xs uppercase font-bold text-slate-400 block mb-1">Elige tu Monto de Recarga Libre:</span>
-                            <span class="text-xs text-slate-500 font-mono">Piso mínimo estricto: $20.00 USDT</span>
+                            <span class="text-xs uppercase font-bold text-slate-400 block mb-1">Monto de Recarga Libre:</span>
+                            <span class="text-[11px] sm:text-xs text-slate-500 font-mono">Piso mínimo estricto: $20.00 USDT</span>
                         </div>
-                        <div class="text-3xl font-extrabold text-cyan-400 font-mono bg-cyan-950/60 px-5 py-2 rounded-2xl border border-cyan-500/30">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono bg-cyan-950/60 px-4 sm:px-5 py-1.5 sm:py-2 rounded-2xl border border-cyan-500/30">
                             $<span id="gas-slider-display">50</span> <span class="text-xs text-slate-400">USDT</span>
                         </div>
                     </div>
 
                     <input type="range" id="gas-slider" min="20" max="500" step="5" value="50" class="w-full h-3 bg-slate-800 rounded-lg cursor-pointer mb-6">
 
-                    <!-- Quick Preset Buttons -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-                        <button class="preset-btn py-2 px-3 rounded-xl border border-slate-700 bg-slate-800/60 text-xs font-mono font-bold hover:border-cyan-400 hover:text-cyan-300 transition" data-amt="20">
-                            $20 USDT (Mínimo)
+                    <!-- Quick Preset Buttons (Comfortable 2x2 Grid on Mobile with >=48px Touch Targets) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mb-6 sm:mb-8">
+                        <button class="preset-btn py-3 px-2 rounded-xl border border-slate-700 bg-slate-800/60 text-xs sm:text-sm font-mono font-bold hover:border-cyan-400 hover:text-cyan-300 transition" data-amt="20">
+                            $20 USDT
                         </button>
-                        <button class="preset-btn py-2 px-3 rounded-xl border border-cyan-500/50 bg-cyan-950/40 text-xs font-mono font-bold text-cyan-300 hover:border-cyan-400 transition" data-amt="50">
-                            $50 USDT (Recomendado)
+                        <button class="preset-btn py-3 px-2 rounded-xl border border-cyan-500/50 bg-cyan-950/40 text-xs sm:text-sm font-mono font-bold text-cyan-300 hover:border-cyan-400 transition" data-amt="50">
+                            $50 (Rec.)
                         </button>
-                        <button class="preset-btn py-2 px-3 rounded-xl border border-slate-700 bg-slate-800/60 text-xs font-mono font-bold hover:border-cyan-400 hover:text-cyan-300 transition" data-amt="100">
+                        <button class="preset-btn py-3 px-2 rounded-xl border border-slate-700 bg-slate-800/60 text-xs sm:text-sm font-mono font-bold hover:border-cyan-400 hover:text-cyan-300 transition" data-amt="100">
                             $100 USDT
                         </button>
-                        <button class="preset-btn py-2 px-3 rounded-xl border border-slate-700 bg-slate-800/60 text-xs font-mono font-bold hover:border-cyan-400 hover:text-cyan-300 transition" data-amt="250">
+                        <button class="preset-btn py-3 px-2 rounded-xl border border-slate-700 bg-slate-800/60 text-xs sm:text-sm font-mono font-bold hover:border-cyan-400 hover:text-cyan-300 transition" data-amt="250">
                             $250 USDT
                         </button>
                     </div>
 
                     <!-- Gas Tank Coverage Breakdown Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-slate-800">
-                        <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-5 sm:pt-6 border-t border-slate-800">
+                        <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
                             <span class="text-slate-400 text-xs uppercase font-semibold block mb-1">Ganancia Neta Cubierta en Binance</span>
-                            <div class="text-3xl font-extrabold text-emerald-400 font-mono">+$<span id="gas-net-coverage">333.33</span> <span class="text-xs">USDT</span></div>
-                            <p class="text-[11px] text-slate-500 mt-2">Utilidades directas para tu cuenta antes de requerir nueva recarga.</p>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">+$<span id="gas-net-coverage">333.33</span> <span class="text-xs">USDT</span></div>
+                            <p class="text-[11px] text-slate-500 mt-1.5">Utilidades directas para tu cuenta antes de requerir nueva recarga.</p>
                         </div>
-                        <div class="bg-slate-950/80 p-5 rounded-2xl border border-slate-800">
+                        <div class="bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-800">
                             <span class="text-slate-400 text-xs uppercase font-semibold block mb-1">Período de Gracia y Alertas</span>
-                            <div class="text-sm font-bold text-slate-200 mt-1 flex items-center">
-                                <i class="fas fa-shield-halved text-cyan-400 mr-2"></i> Grace Period 48h a saldo cero
+                            <div class="text-xs sm:text-sm font-bold text-slate-200 mt-1 flex items-center">
+                                <i class="fas fa-shield-halved text-cyan-400 mr-2 shrink-0"></i> Grace Period 48h a saldo cero
                             </div>
-                            <p class="text-[11px] text-slate-500 mt-2">Alertas proactivas al 25% y 10%. Coberturas preservadas sin desarmes abruptos.</p>
+                            <p class="text-[11px] text-slate-500 mt-1.5">Alertas proactivas al 25% y 10%. Coberturas preservadas sin desarmes abruptos.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <a href="https://t.me/ylisto_bot" target="_blank" class="inline-block bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold px-10 py-4 rounded-xl shadow-lg transition">
+                    <a href="https://t.me/ylisto_bot" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl shadow-lg transition min-h-[48px]">
                         Recargar Gas Tank en Telegram <i class="fab fa-telegram ml-2"></i>
                     </a>
                     <p class="text-xs text-slate-500 mt-3 font-mono">Comando rápido en bot: <code>/recargar &lt;monto&gt;</code> &bull; Monedas: BNB / USDT</p>
@@ -428,42 +528,42 @@
         </section>
 
         <!-- Security, Anti-Loss Architecture & Risk Disclaimers Section -->
-        <section id="seguridad" class="card-glass p-8 sm:p-12 md:p-16 rounded-[2.5rem] border border-emerald-500/20 mb-20 md:mb-28">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+        <section id="seguridad" class="card-glass p-5 sm:p-8 md:p-12 lg:p-16 rounded-3xl md:rounded-[2.5rem] border border-emerald-500/20 mb-16 sm:mb-20 md:mb-28">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-10 sm:mb-12">
                 <div>
                     <span class="text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Protocolo Institucional Blindado</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">¿Por qué es Cero Riesgo Direccional?</h2>
-                    <p class="text-slate-300 text-base leading-relaxed mb-6">
+                    <h2 class="fluid-h2 font-bold tracking-tight text-white mb-4 sm:mb-6">¿Por qué es Cero Riesgo Direccional?</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
                         En el trading direccional tradicional, el inversor intenta adivinar si el precio subirá o bajará. Si se equivoca, asume pérdidas de capital.
                     </p>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
                         YlistoBot opera bajo una estrategia <strong class="text-white">Cash & Carry Cuantitativa</strong>: compramos el activo en el mercado Spot e inmediatamente abrimos una posición corta idéntica en Futuros Perpetuos. El valor neto de la cartera es matemáticamente constante (<span class="font-mono text-cyan-400 font-bold">&Delta; = 0</span>). El beneficio proviene de las tasas de fondeo que el mercado alcista abona periódicamente a las posiciones cortas.
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-shield-virus text-emerald-400 text-lg mt-1"></i>
+                            <i class="fas fa-shield-virus text-emerald-400 text-base sm:text-lg mt-0.5 shrink-0"></i>
                             <div>
-                                <h4 class="text-sm font-bold text-white">Salvaguarda Auto Margin Top-Up</h4>
-                                <p class="text-xs text-slate-400">Si un activo experimenta un rally anómalo superior al 12%, el sistema ejecuta rebalanceo de margen o desapalancamiento simétrico al 50%, manteniendo el precio de liquidación a más del 35% de distancia.</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-white">Salvaguarda Auto Margin Top-Up</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">Si un activo experimenta un rally anómalo superior al 12%, el sistema ejecuta rebalanceo de margen o desapalancamiento simétrico al 50%, manteniendo el precio de liquidación a más del 35% de distancia.</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i class="fas fa-key text-cyan-400 text-lg mt-1"></i>
+                            <i class="fas fa-key text-cyan-400 text-base sm:text-lg mt-0.5 shrink-0"></i>
                             <div>
-                                <h4 class="text-sm font-bold text-white">Certificación Fail-Closed de Seguridad</h4>
-                                <p class="text-xs text-slate-400">El backend rechaza estrictamente cualquier clave API que tenga habilitado el permiso de retiros. Cero riesgo de transferencias externas.</p>
+                                <h4 class="text-xs sm:text-sm font-bold text-white">Certificación Fail-Closed de Seguridad</h4>
+                                <p class="text-xs text-slate-400 leading-relaxed">El backend rechaza estrictamente cualquier clave API que tenga habilitado el permiso de retiros. Cero riesgo de transferencias externas.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Quantitative Operational Telemetry Card -->
-                <div class="bg-slate-950 p-8 rounded-3xl border border-slate-800 font-mono text-xs text-slate-300 space-y-4 shadow-xl">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-400 text-[11px]">
-                        <span>TELEMETRÍA CUANTITATIVA (DAEMON EN PRODUCCIÓN)</span>
-                        <span class="inline-flex items-center text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2"></span> CONECTADO</span>
+                <div class="bg-slate-950 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-slate-800 font-mono text-xs text-slate-300 space-y-3.5 shadow-xl">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-400 text-[10px] sm:text-[11px]">
+                        <span>TELEMETRÍA CUANTITATIVA (DAEMON EN VIVO)</span>
+                        <span class="inline-flex items-center text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-1.5"></span> CONECTADO</span>
                     </div>
-                    <div class="space-y-2.5">
+                    <div class="space-y-2.5 text-[11px] sm:text-xs">
                         <div class="flex justify-between">
                             <span class="text-slate-500">ESTRATEGIA:</span>
                             <span class="text-white font-bold">Cash & Carry 4x + Basis Box</span>
@@ -501,9 +601,9 @@
             </div>
 
             <!-- Radical Transparency: Technical & Risk Disclaimers -->
-            <div class="bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-amber-500/20 text-xs text-slate-400 leading-relaxed space-y-3">
-                <div class="flex items-center space-x-2 text-amber-400 font-bold text-sm">
-                    <i class="fas fa-triangle-exclamation"></i>
+            <div class="bg-slate-900/60 p-5 sm:p-7 md:p-8 rounded-2xl border border-amber-500/20 text-xs text-slate-400 leading-relaxed space-y-3">
+                <div class="flex items-center space-x-2 text-amber-400 font-bold text-xs sm:text-sm">
+                    <i class="fas fa-triangle-exclamation shrink-0"></i>
                     <span>DIVULGACIÓN DE RIESGOS TÉCNICOS Y CONDICIONES OPERATIVAS (POLÍTICA DE TRANSPARENCIA RADICAL)</span>
                 </div>
                 <p>
@@ -524,9 +624,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-12 px-6">
-        <div class="container mx-auto max-w-5xl text-center space-y-6">
-            <div class="flex justify-center items-center space-x-3">
+    <footer class="border-t border-slate-800 bg-slate-950 py-10 sm:py-12 px-4 sm:px-6 pb-24 md:pb-12">
+        <div class="container mx-auto max-w-5xl text-center space-y-5 sm:space-y-6">
+            <div class="flex justify-center items-center space-x-2.5">
                 <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-black font-extrabold text-sm">
                     Y
                 </div>
@@ -537,7 +637,7 @@
                 YlistoBot es un software cuantitativo de automatización algorítmica para Binance. No actúa como intermediario financiero ni custodio de fondos. El usuario mantiene el control exclusivo de sus activos en su propia cuenta de exchange mediante API keys seguras sin permisos de retiro.
             </p>
 
-            <div class="flex justify-center space-x-6 text-xs text-slate-400 pt-2">
+            <div class="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs text-slate-400 pt-2">
                 <a href="#simulador" class="hover:text-cyan-400">Calculadora</a>
                 <a href="#alta-baja" class="hover:text-cyan-400">Cómo Ingresar y Salir</a>
                 <a href="#gas-tank-libre" class="hover:text-cyan-400">Gas Tank Libre</a>
@@ -545,11 +645,27 @@
                 <a href="https://t.me/ylisto_bot" target="_blank" class="hover:text-cyan-400">Canal Oficial Telegram</a>
             </div>
 
-            <p class="text-[10px] text-slate-600 font-mono pt-4">
+            <p class="text-[10px] text-slate-600 font-mono pt-2">
                 &copy; 2026 YLISTOBOT. INGENIERÍA CUANTITATIVA DELTA-NEUTRAL EN DERIVADOS.
             </p>
         </div>
     </footer>
+
+    <!-- Mobile Sticky Bottom CTA Bar (High-Conversion Touch Target) -->
+    <aside aria-label="Acceso Rápido Móvil" class="md:hidden fixed bottom-0 left-0 right-0 z-50 px-4 py-3 bg-slate-950/95 backdrop-blur-md border-t border-cyan-500/30 shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.8)]">
+        <div class="container mx-auto flex items-center justify-between gap-3">
+            <div class="flex flex-col">
+                <span class="text-[10px] font-mono text-slate-400 flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1.5 shrink-0"></span>
+                    ROE Consolidado
+                </span>
+                <span class="text-sm font-extrabold text-cyan-400 font-mono" id="sticky-live-apr">5.73% APR</span>
+            </div>
+            <a href="https://t.me/ylisto_bot" target="_blank" class="flex-1 max-w-[210px] min-h-[48px] bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-extrabold text-xs sm:text-sm rounded-xl flex items-center justify-center px-4 py-2.5 shadow-lg shadow-cyan-500/20 active:scale-95 transition">
+                <i class="fab fa-telegram text-base mr-2"></i> Abrir en Telegram
+            </a>
+        </div>
+    </aside>
 
     <!-- Interactive Calculator & Live Telemetry Fetch JS -->
     <script>
@@ -577,13 +693,12 @@
         // Telemetry DOM Elements
         const heroLiveApr = document.getElementById('hero-live-apr');
         const heroLiveShortApr = document.getElementById('hero-live-short-apr');
-        const kpiLiveApr = document.getElementById('kpi-live-apr');
-        const kpiLiveShortApr = document.getElementById('kpi-live-short-apr');
+        const stickyLiveApr = document.getElementById('sticky-live-apr');
         const telAccStatus = document.getElementById('tel-acc-status');
 
         // Dynamic parameters
-        let liveAprTotalEquity = 2.27; // Fallback
-        let liveAprShortNotional = 10.00;
+        let liveAprTotalEquity = 5.73; // Live verified ROE
+        let liveAprShortNotional = 10.95;
         let isLiveMode = false;
 
         const TARGET_GROSS_APR = 0.12;       // 12.0% APR Bruto
@@ -639,15 +754,15 @@
 
         btnModeTarget.addEventListener('click', () => {
             isLiveMode = false;
-            btnModeTarget.className = 'px-5 py-2 rounded-lg text-xs font-bold transition bg-cyan-500 text-black';
-            btnModeLive.className = 'px-5 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition';
+            btnModeTarget.className = 'px-4 py-2.5 rounded-lg text-xs font-bold transition bg-cyan-500 text-black min-h-[40px] sm:min-h-0';
+            btnModeLive.className = 'px-4 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition min-h-[40px] sm:min-h-0 mt-1 sm:mt-0';
             updateCalculator();
         });
 
         btnModeLive.addEventListener('click', () => {
             isLiveMode = true;
-            btnModeLive.className = 'px-5 py-2 rounded-lg text-xs font-bold transition bg-emerald-500 text-black';
-            btnModeTarget.className = 'px-5 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition';
+            btnModeLive.className = 'px-4 py-2.5 rounded-lg text-xs font-bold transition bg-emerald-500 text-black min-h-[40px] sm:min-h-0 mt-1 sm:mt-0';
+            btnModeTarget.className = 'px-4 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition min-h-[40px] sm:min-h-0';
             updateCalculator();
         });
 
@@ -662,13 +777,12 @@
 
                 if (tel.portfolio_apr_total_equity_pct) {
                     liveAprTotalEquity = parseFloat(tel.portfolio_apr_total_equity_pct);
-                    heroLiveApr.innerText = liveAprTotalEquity.toFixed(2) + '%';
-                    kpiLiveApr.innerText = liveAprTotalEquity.toFixed(2) + '%';
+                    if (heroLiveApr) heroLiveApr.innerText = liveAprTotalEquity.toFixed(2) + '%';
+                    if (stickyLiveApr) stickyLiveApr.innerText = liveAprTotalEquity.toFixed(2) + '% APR';
                 }
                 if (tel.portfolio_apr_short_notional_pct) {
                     liveAprShortNotional = parseFloat(tel.portfolio_apr_short_notional_pct);
-                    heroLiveShortApr.innerText = liveAprShortNotional.toFixed(2) + '%';
-                    kpiLiveShortApr.innerText = liveAprShortNotional.toFixed(2) + '%';
+                    if (heroLiveShortApr) heroLiveShortApr.innerText = liveAprShortNotional.toFixed(2) + '%';
                 }
                 if (tel.accounting_status && telAccStatus) {
                     telAccStatus.innerText = tel.accounting_status;
