@@ -1,210 +1,627 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YLISTOBOT - Trading Futurista</title>
+    <title>YLISTOBOT — Renta Pasiva en Dólares con Grado Institucional (Delta-Neutral)</title>
+    <meta name="description" content="Generador cuantitativo de rendimiento delta-neutral no custodial. Rendimiento pasivo en dólares directamente en tu cuenta de Binance sin riesgo direccional.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-green: #39FF14;
-            --dark-gray: #0b0f19;
-            --panel-gray: #0e1525;
+            --neon-cyan: #06b6d4;
+            --neon-green: #10b981;
+            --dark-bg: #090d16;
+            --panel-bg: #0f172a;
+            --card-border: rgba(255, 255, 255, 0.08);
         }
-        body { background-color: var(--dark-gray); color: #e5e7eb; font-family: 'Inter', sans-serif; }
-        .neon-text { color: var(--neon-green); text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
-        .neon-border { border: 1px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.1); }
-        .bg-panel { background-color: var(--panel-gray); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .gradient-bg { background: radial-gradient(circle at top right, #161b22, #0b0f19); }
+        body {
+            background-color: var(--dark-bg);
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glow-cyan {
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.45);
+        }
+        .glow-green {
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
+        }
+        .card-glass {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+        }
+        .card-glass:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15);
+        }
+        input[type="range"] {
+            accent-color: #06b6d4;
+        }
     </style>
 </head>
-<body class="gradient-bg min-h-screen">
-    <nav class="p-6 border-b border-gray-800 flex justify-between items-center backdrop-blur-md sticky top-0 z-50">
-        <h1 class="text-2xl font-bold neon-text font-mono">YLISTOBOT</h1>
-        <a href="https://t.me/ylisto_bot" target="_blank" class="bg-green-500 hover:bg-green-600 text-black px-6 py-2 rounded-full font-bold transition flex items-center">
-            TELEGRAM <i class="fab fa-telegram ml-2"></i>
-        </a>
-    </nav>
+<body class="min-h-screen selection:bg-cyan-500 selection:text-black">
 
-    <main class="container mx-auto px-6 py-12">
-        <section class="text-center mb-20">
-            <h2 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Señales de Futuros <br><span class="neon-text">Automáticas</span></h2>
-            <p class="text-gray-400 text-xl max-w-2xl mx-auto mb-10">Potencia tu estrategia con señales precisas, gestión de riesgo inteligente y transparencia total en tiempo real.</p>
-            <a href="https://t.me/ylisto_bot" target="_blank" class="inline-block neon-border bg-transparent text-white text-lg px-10 py-4 rounded-full font-bold transition hover:bg-green-500 hover:text-black">
-                VER SEÑALES AHORA
-            </a>
-        </section>
+    <!-- Top Notice Bar -->
+    <aside aria-label="Aviso de Seguridad" class="bg-gradient-to-r from-cyan-950/60 via-slate-900 to-emerald-950/60 border-b border-cyan-500/20 py-2.5 px-4 text-center text-xs font-medium text-cyan-300">
+        <div class="container mx-auto flex items-center justify-center space-x-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">NO CUSTODIAL</span>
+            <span>Tus fondos nunca salen de tu billetera de Binance. Retiros desactivados por protocolo criptográfico.</span>
+        </div>
+    </aside>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
-            <div class="bg-panel p-6 rounded-2xl neon-border">
-                <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">Operaciones Cerradas</p>
-                <h3 id="total-trades" class="text-3xl font-bold neon-text font-mono">--</h3>
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 card-glass border-b border-slate-800/80 px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-cyan-500/20">
+                    Y
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight font-mono text-white">YLISTO<span class="text-cyan-400">BOT</span></span>
+                    <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">v4.2 Sweet Spot</span>
+                </div>
             </div>
-            <div class="bg-panel p-6 rounded-2xl neon-border">
-                <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">Winrate (%)</p>        
-                <h3 id="winrate" class="text-3xl font-bold neon-text font-mono">--%</h3>
-            </div>
-            <div id="pnl-daily-card" class="bg-panel p-6 rounded-2xl neon-border">
-                <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Diario</p>
-                <h3 id="daily-pnl" class="text-3xl font-bold neon-text font-mono">0.00%</h3>
-            </div>
-            <div id="pnl-weekly-card" class="bg-panel p-6 rounded-2xl neon-border">
-                <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Semanal</p>        
-                <h3 id="weekly-pnl" class="text-3xl font-bold neon-text font-mono">0.00%</h3>
-            </div>
-            <div id="pnl-monthly-card" class="bg-panel p-6 rounded-2xl neon-border">
-                <p class="text-gray-400 text-sm mb-2 uppercase tracking-wider font-bold">PnL Mensual</p>        
-                <h3 id="monthly-pnl" class="text-3xl font-bold neon-text font-mono">0.00%</h3>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#simulador" class="hover:text-cyan-400 transition">Calculadora de Renta</a>
+                <a href="#como-funciona" class="hover:text-cyan-400 transition">Cómo Funciona</a>
+                <a href="#seguridad" class="hover:text-cyan-400 transition">Seguridad y Riesgos</a>
+                <a href="#planes" class="hover:text-cyan-400 transition">Gas Tank Prepago</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="https://t.me/ylisto_bot" target="_blank" class="bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 px-5 py-2.5 rounded-xl font-bold text-sm transition transform hover:scale-[1.02] shadow-lg shadow-cyan-500/20 flex items-center">
+                    <i class="fab fa-telegram mr-2 text-base"></i> Abrir en Telegram
+                </a>
             </div>
         </div>
+    </header>
 
-        <div class="bg-panel p-8 rounded-2xl mb-12">
-            <h2 class="text-2xl font-bold mb-6 neon-text flex items-center">
-                <i class="fas fa-broadcast-tower mr-3"></i> Radar del Sistema: Activos en Monitoreo
-            </h2>
-            <div id="active-pairs-container" class="flex flex-wrap justify-center gap-2 sm:gap-3">
-                <p class="text-gray-500 animate-pulse">Sincronizando radares...</p>
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <!-- Hero Section -->
+        <section class="text-center max-w-4xl mx-auto mb-20 md:mb-28">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-8">
+                <i class="fas fa-shield-halved text-sm"></i>
+                <span>Arquitectura Delta-Neutral (&Delta; = 0) &bull; Zero Market Risk &bull; No Custodial</span>
             </div>
-        </div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8">
+                Renta Pasiva en Dólares con <br>
+                <span class="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent glow-cyan">
+                    Grado Institucional
+                </span>
+            </h1>
+            <p class="text-lg sm:text-2xl text-slate-300 font-light leading-relaxed mb-6">
+                Estrategia cuantitativa con objetivo institucional de <strong class="text-emerald-400 font-semibold">10% a 14% APR</strong> en dólares digitales (USDT) sin exposición a caídas o subidas de Bitcoin.
+            </p>
+            <p class="text-sm sm:text-base text-slate-400 max-w-3xl mx-auto mb-8 leading-normal">
+                Arbitraje de tasas de fondeo (Cash & Carry a 4x + Basis Box trimestral) ejecutado en tiempo real en tu propia cuenta de Binance mediante API keys no custodiales. <span class="text-slate-200 font-medium">Tus fondos jamás abandonan tu exchange.</span>
+            </p>
 
-        <div class="bg-panel p-8 rounded-2xl mb-20">
-            <h2 class="text-2xl font-bold mb-8 neon-text flex items-center"><i class="fas fa-trophy mr-3"></i> Ranking de Pares</h2>
-            <div id="ranking-container" class="overflow-x-auto"></div>
-        </div>
+            <!-- Live Verification Pill -->
+            <div class="inline-flex flex-wrap items-center justify-center gap-3 bg-slate-900/90 border border-cyan-500/30 px-5 py-3 rounded-2xl mb-10 text-xs font-mono text-slate-300 shadow-xl">
+                <span class="flex items-center text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2"></span> TELEMETRÍA EN VIVO:</span>
+                <span>APR Total Equity: <strong class="text-cyan-400 font-bold" id="hero-live-apr">2.27%</strong></span>
+                <span class="text-slate-600">|</span>
+                <span>APR Nocional Corto: <strong class="text-emerald-400 font-bold" id="hero-live-short-apr">10.00%</strong></span>
+                <span class="text-slate-600">|</span>
+                <span>Total Monitoreado: <strong class="text-white" id="hero-live-equity">$1,623.07 USDT</strong></span>
+            </div>
 
-        <div class="bg-panel p-8 rounded-2xl mb-20">
-            <h2 class="text-2xl font-bold mb-8 neon-text flex items-center"><i class="fas fa-calendar-alt mr-3"></i> PNL Mensual</h2>
-            <div id="monthly-pnl-table-container" class="overflow-x-auto"></div>
-        </div>
-
-        <section class="mb-20">
-            <h2 class="text-4xl font-bold mb-12 text-center neon-text">Nuestra Estrategia Evolutiva</h2>        
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-panel p-8 rounded-2xl hover:border-green-500/50 transition border border-transparent">
-                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6"><i class="fas fa-brain text-green-500 text-xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">1. Predicción IA</h3>
-                    <p class="text-gray-400 leading-relaxed">Un modelo de Machine Learning genera una probabilidad de éxito dinámico según el rendimiento real.</p>
-                </div>
-                <div class="bg-panel p-8 rounded-2xl hover:border-green-500/50 transition border border-transparent">
-                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6"><i class="fas fa-layer-group text-green-500 text-xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">2. Confluencia</h3>
-                    <p class="text-gray-400 leading-relaxed">Las señales son validadas por múltiples filtros de tendencia, sentimiento y on-chain.</p>
-                </div>
-                <div class="bg-panel p-8 rounded-2xl hover:border-green-500/50 transition border border-transparent">
-                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6"><i class="fas fa-crosshairs text-green-500 text-xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">3. Entrada en Vivo</h3>
-                    <p class="text-gray-400 leading-relaxed">Verificación de spread y confirmación de intención en timeframes menores para optimizar la entrada.</p>
-                </div>
-                <div class="bg-panel p-8 rounded-2xl hover:border-green-500/50 transition border border-transparent">
-                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-6"><i class="fas fa-sliders-h text-green-500 text-xl"></i></div>
-                    <h3 class="text-xl font-bold mb-4">4. Gestión 50/50</h3>
-                    <p class="text-gray-400 leading-relaxed">Aseguramos el 50% en TP1, movemos a Breakeven y el resto corre con Trailing Stop Loss.</p>
-                </div>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#simulador" class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-base font-bold px-8 py-4 rounded-xl shadow-xl shadow-cyan-500/20 transition transform hover:-translate-y-0.5">
+                    <i class="fas fa-calculator mr-2"></i> Simular Mi Rendimiento
+                </a>
+                <a href="#seguridad" class="w-full sm:w-auto card-glass hover:bg-slate-800/80 text-white text-base font-semibold px-8 py-4 rounded-xl transition border border-slate-700">
+                    <i class="fas fa-microchip mr-2 text-cyan-400"></i> Auditoría y Riesgos
+                </a>
             </div>
         </section>
 
-        
-        <section class="text-center bg-panel p-16 rounded-[3rem] border border-green-500/20 relative overflow-hidden mb-20 shadow-2xl shadow-green-500/5">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-green-500/5 blur-[100px]"></div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">Membresía <span class="neon-text">Premium</span></h2>
-            <p class="text-gray-400 mb-10 text-lg max-w-xl mx-auto uppercase tracking-widest font-bold text-xs opacity-50">Comunidad de Señales Algorítmicas</p>
-            <div class="mb-12">
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-                    <div class="flex flex-col">
-                        <span class="text-xl text-gray-600 line-through font-bold">49.99</span>
-                        <span class="text-xs text-gray-600 uppercase font-bold">Precio Base</span>
+        <!-- KPI Metrics Grid -->
+        <section aria-label="Métricas de Rendimiento" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-20 md:mb-28">
+            <div class="card-glass p-6 rounded-2xl">
+                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Objetivo Algorítmico</span>
+                <div class="text-3xl sm:text-4xl font-extrabold text-cyan-400 font-mono">10% – 14%</div>
+                <p class="text-slate-400 text-xs mt-2">APR Neto objetivo a plena asignación</p>
+            </div>
+            <div class="card-glass p-6 rounded-2xl">
+                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Rendimiento en Vivo</span>
+                <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono"><span id="kpi-live-apr">2.27%</span></div>
+                <p class="text-slate-400 text-xs mt-2">APR Total Equity (<span id="kpi-live-short-apr" class="text-slate-300 font-bold">10.00%</span> en corto)</p>
+            </div>
+            <div class="card-glass p-6 rounded-2xl">
+                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Riesgo Direccional</span>
+                <div class="text-3xl sm:text-4xl font-extrabold text-white font-mono">&Delta; = 0.00</div>
+                <p class="text-slate-400 text-xs mt-2">Cobertura simétrica Spot/Futuros</p>
+            </div>
+            <div class="card-glass p-6 rounded-2xl">
+                <span class="text-slate-400 text-xs font-semibold uppercase tracking-wider block mb-1">Modelo de Cobro</span>
+                <div class="text-3xl sm:text-4xl font-extrabold text-cyan-300 font-mono">15% Fee</div>
+                <p class="text-slate-400 text-xs mt-2">Gas Tank: solo sobre ganancias reales</p>
+            </div>
+        </section>
+
+        <!-- Interactive Calculator Section -->
+        <section id="simulador" class="card-glass p-8 sm:p-12 md:p-16 rounded-[2.5rem] border border-cyan-500/20 mb-20 md:mb-28 relative overflow-hidden shadow-2xl">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Simulador Cuantitativo Interactivo</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Calcula tu Flujo de Caja Pasivo</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2">Proyecta el rendimiento de tu capital bajo el modelo institucional y compáralo con instrumentos tradicionales.</p>
+                </div>
+
+                <!-- Slider Card -->
+                <div class="bg-slate-900/90 p-6 sm:p-8 rounded-2xl border border-slate-800 mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <label for="capital-slider" class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Capital Desplegado en Binance:</label>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono bg-cyan-950/60 px-4 py-1.5 rounded-xl border border-cyan-500/30">
+                            $<span id="capital-display">5,000</span> <span class="text-xs text-slate-400">USDT</span>
+                        </div>
                     </div>
-                    <div class="flex items-baseline">
-                        <span class="text-5xl sm:text-7xl md:text-8xl font-bold neon-text font-mono tracking-tighter">29.99</span>
-                        <span class="text-lg sm:text-2xl text-gray-500 ml-2 sm:ml-4 font-bold whitespace-nowrap">USDT / mes</span>
+                    <input type="range" id="capital-slider" min="500" max="50000" step="500" value="5000" class="w-full h-3 bg-slate-800 rounded-lg cursor-pointer">
+                    <div class="flex justify-between text-xs text-slate-500 font-mono mt-2">
+                        <span>$500 USDT</span>
+                        <span>$10,000 USDT</span>
+                        <span>$25,000 USDT</span>
+                        <span>$50,000 USDT</span>
                     </div>
                 </div>
-                <div class="mt-8 py-2 px-6 bg-green-500/10 rounded-full inline-block border border-green-500/20">
-                    <p class="text-green-400 text-sm font-bold animate-pulse uppercase tracking-widest">
-                        OFERTA DE LANZAMIENTO: SOLO POR TIEMPO LIMITADO
+
+                <!-- Mode Selector -->
+                <div class="flex justify-center mb-8">
+                    <div class="inline-flex p-1 bg-slate-950 rounded-xl border border-slate-800">
+                        <button id="btn-mode-target" class="px-5 py-2 rounded-lg text-xs font-bold transition bg-cyan-500 text-black">
+                            Objetivo Institucional (10.2% Neto)
+                        </button>
+                        <button id="btn-mode-live" class="px-5 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition">
+                            Rendimiento en Vivo Actual (~3.0% Neto)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Results Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-center">
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
+                        <span class="text-slate-400 text-xs uppercase font-semibold block mb-1">Rendimiento por Día</span>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">+$<span id="daily-net">1.40</span> <span class="text-xs">USDT</span></div>
+                        <span class="text-[11px] text-slate-500">Cobrado cada 4 u 8 horas</span>
+                    </div>
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
+                        <span class="text-slate-400 text-xs uppercase font-semibold block mb-1">Rendimiento por Mes</span>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">+$<span id="monthly-net">42.50</span> <span class="text-xs">USDT</span></div>
+                        <span class="text-[11px] text-slate-500">Flujo neto a tu billetera</span>
+                    </div>
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-cyan-950/20 to-slate-900">
+                        <span class="text-cyan-400 text-xs uppercase font-bold block mb-1">Rendimiento Anual Neto</span>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-cyan-300 font-mono">+$<span id="annual-net">510.00</span> <span class="text-xs">USDT</span></div>
+                        <span class="text-[11px] text-emerald-400 font-semibold font-mono" id="label-net-apr">10.20% APR Neto</span>
+                    </div>
+                </div>
+
+                <!-- Benchmarking Comparison Table -->
+                <div class="bg-slate-950/80 p-6 rounded-2xl border border-slate-800/80">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 text-center">Comparativa Frente a Otras Alternativas en Dólares</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-bolt text-cyan-400 text-lg"></i>
+                                <div>
+                                    <div class="text-sm font-bold text-white">YlistoBot Sweet Spot (Delta-Neutral)</div>
+                                    <div class="text-xs text-slate-400" id="cmp-desc-ylisto">10.20% APR Neto &bull; Custodia propia &bull; Liquidez inmediata</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-base sm:text-lg font-bold font-mono text-cyan-300">+$<span id="cmp-ylisto">510.00</span></div>
+                                <div class="text-[10px] text-emerald-400 font-semibold font-mono" id="cmp-apr-ylisto">+10.20% APR</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/40 border border-slate-800">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-coins text-amber-400 text-lg"></i>
+                                <div>
+                                    <div class="text-sm font-medium text-slate-300">Binance Simple Earn Flexible</div>
+                                    <div class="text-xs text-slate-500">~6.00% APR &bull; Tasas decrecientes con capital mayor a $1,000</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-base sm:text-lg font-bold font-mono text-slate-400">+$<span id="cmp-binance">300.00</span></div>
+                                <div class="text-[10px] text-slate-500 font-mono">6.00% APR</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/40 border border-slate-800">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-landmark text-blue-400 text-lg"></i>
+                                <div>
+                                    <div class="text-sm font-medium text-slate-300">Bonos del Tesoro USA (T-Bills) / Plazo Fijo USD</div>
+                                    <div class="text-xs text-slate-500">~4.50% APR &bull; Retenciones impositivas, comisiones de broker e iliquidez</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-base sm:text-lg font-bold font-mono text-slate-400">+$<span id="cmp-tbills">225.00</span></div>
+                                <div class="text-[10px] text-slate-500 font-mono">4.50% APR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <a href="https://t.me/ylisto_bot" target="_blank" class="inline-block bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold px-10 py-4 rounded-xl shadow-lg transition">
+                        Solicitar Acceso Anticipado en Telegram <i class="fab fa-telegram ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3-Step Infographic: How It Works -->
+        <section id="como-funciona" class="mb-20 md:mb-28">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Simplicidad Total</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">¿Cómo Funciona en 3 Pasos?</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2">Sin entregar tus claves bancarias ni depositar tu dinero en manos de terceros.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-glass p-8 rounded-3xl relative">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-2xl mb-6">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Conectas tu API de Binance</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Creas una clave API en Binance habilitando únicamente permisos de lectura y trading (Spot + Futuros + Universal Transfer). <strong class="text-cyan-300">Desmarcas 'Enable Withdrawals'.</strong>
                     </p>
+                    <div class="text-[11px] text-emerald-400 font-mono bg-emerald-950/30 p-2.5 rounded-lg border border-emerald-500/20">
+                        <i class="fas fa-lock mr-1"></i> Retiros bloqueados criptográficamente.
+                    </div>
+                </div>
+
+                <div class="card-glass p-8 rounded-3xl relative">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-2xl mb-6">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Cargas tu Gas Tank</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Como YlistoBot no tiene acceso a tus fondos para cobrar comisiones, precargas créditos de rendimiento ($20, $50 o $100 USDT) vía pasarela automatizada.
+                    </p>
+                    <div class="text-[11px] text-cyan-300 font-mono bg-cyan-950/30 p-2.5 rounded-lg border border-cyan-500/20">
+                        <i class="fas fa-gas-pump mr-1"></i> Solo se descuenta el 15% de tus ganancias netas.
+                    </div>
+                </div>
+
+                <div class="card-glass p-8 rounded-3xl relative">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-2xl mb-6">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Disfrutas tu Renta Diaria</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        El motor abre coberturas simétricas 1:1 Spot y Futuros a 4x con salvaguarda Auto Margin Top-Up. Cobras comisiones de fondeo positivas cada 4 u 8 horas directamente en Binance.
+                    </p>
+                    <div class="text-[11px] text-teal-300 font-mono bg-teal-950/30 p-2.5 rounded-lg border border-teal-500/20">
+                        <i class="fas fa-check-double mr-1"></i> Disponibilidad y liquidez inmediata de tus fondos.
+                    </div>
                 </div>
             </div>
-            <a href="https://t.me/ylisto_bot" target="_blank" class="inline-block bg-green-500 hover:bg-green-600 text-black text-lg sm:text-xl px-8 sm:px-16 py-5 rounded-full font-bold transition transform hover:scale-105 shadow-2xl shadow-green-500/30 uppercase tracking-tighter whitespace-nowrap">
-                UNIRME AHORA <i class="fab fa-telegram ml-2"></i>
-            </a>
-            <p class="text-gray-600 text-xs mt-10 uppercase tracking-widest">Pago seguro vía Coinremitter en USDT</p>
+        </section>
+
+        <!-- Security, Anti-Loss Architecture & Risk Disclaimers Section -->
+        <section id="seguridad" class="card-glass p-8 sm:p-12 md:p-16 rounded-[2.5rem] border border-emerald-500/20 mb-20 md:mb-28">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+                <div>
+                    <span class="text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Protocolo Institucional Blindado</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">¿Por qué es Cero Riesgo Direccional?</h2>
+                    <p class="text-slate-300 text-base leading-relaxed mb-6">
+                        En el trading direccional tradicional, el inversor intenta adivinar si el precio subirá o bajará. Si se equivoca, asume pérdidas de capital.
+                    </p>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        YlistoBot opera bajo una estrategia <strong class="text-white">Cash & Carry Cuantitativa</strong>: compramos el activo en el mercado Spot e inmediatamente abrimos una posición corta idéntica en Futuros Perpetuos. El valor neto de la cartera es matemáticamente constante (<span class="font-mono text-cyan-400 font-bold">&Delta; = 0</span>). El beneficio proviene de las tasas de fondeo que el mercado alcista abona periódicamente a las posiciones cortas.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-shield-virus text-emerald-400 text-lg mt-1"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Salvaguarda Auto Margin Top-Up</h4>
+                                <p class="text-xs text-slate-400">Si un activo experimenta un rally anómalo superior al 12%, el sistema ejecuta rebalanceo de margen o desapalancamiento simétrico al 50%, manteniendo el precio de liquidación a más del 35% de distancia.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-key text-cyan-400 text-lg mt-1"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Certificación Fail-Closed de Seguridad</h4>
+                                <p class="text-xs text-slate-400">El backend rechaza estrictamente cualquier clave API que tenga habilitado el permiso de retiros. Cero riesgo de transferencias externas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Production Telemetry Card -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-slate-800 font-mono text-xs text-slate-300 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-400 text-[11px]">
+                        <span>TELEMETRÍA EN PRODUCCIÓN (DAEMON PID 9724)</span>
+                        <span class="inline-flex items-center text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2"></span> CONECTADO</span>
+                    </div>
+                    <div class="space-y-2.5">
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">ESTRATEGIA:</span>
+                            <span class="text-white font-bold">Cash & Carry 4x + Basis Box</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">DELTA_TOTAL:</span>
+                            <span class="text-emerald-400 font-bold">0.00000000 (&Delta; = 0)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">TOTAL_REAL_EQUITY:</span>
+                            <span class="text-cyan-400 font-bold" id="tel-equity">$1,623.07 USDT</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">CAPITAL_DESPLEGABLE:</span>
+                            <span class="text-white" id="tel-deployable">$1,130.29 USDT</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">LEVERAGE_DYNAMIC:</span>
+                            <span class="text-cyan-400">4x Cross Margin</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">FLUJO_DIARIO_ESTIMADO:</span>
+                            <span class="text-emerald-400" id="tel-daily">+0.1011 USDT/día</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">WITHDRAWALS_DISABLED:</span>
+                            <span class="text-emerald-400 font-bold">ENFORCED_FAIL_CLOSED</span>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex justify-between items-center">
+                        <span>Última sincronización: <span id="tel-last-update" class="text-slate-400">24/10/2026 17:26 UTC</span></span>
+                        <span class="text-emerald-400 font-bold">[AUDITADO]</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Radical Transparency: Technical & Risk Disclaimers -->
+            <div class="bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-amber-500/20 text-xs text-slate-400 leading-relaxed space-y-3">
+                <div class="flex items-center space-x-2 text-amber-400 font-bold text-sm">
+                    <i class="fas fa-triangle-exclamation"></i>
+                    <span>DIVULGACIÓN DE RIESGOS TÉCNICOS Y CONDICIONES OPERATIVAS (POLÍTICA DE TRANSPARENCIA RADICAL)</span>
+                </div>
+                <p>
+                    <strong class="text-slate-200">1. Mecánica de Generación de Rendimiento:</strong> Los rendimientos provienen de las tasas de financiamiento (Funding Rates) que los compradores de futuros perpetuos pagan a los vendedores en entornos de mercado predominantemente optimistas. En episodios de sentimiento bajista prolongado, las tasas de fondeo pueden disminuir o tornarse temporalmente neutras, reduciendo el flujo generado.
+                </p>
+                <p>
+                    <strong class="text-slate-200">2. Riesgo de Base (Basis Risk) y Deslizamiento Temporal:</strong> Aunque la posición es delta-neutral a nivel nocional, durante picos extremos de volatilidad intradía el spread entre el mercado Spot y el contrato Perpetuo puede fluctuar antes de converger al vencimiento o corte de financiamiento. El motor incorpora filtros de liquidez y márgenes de seguridad para minimizar el slippage en órdenes sincronizadas.
+                </p>
+                <p>
+                    <strong class="text-slate-200">3. Apalancamiento a 4x y Colateral Cruzado:</strong> La pata corta opera en Cross Margin a 4x para maximizar la eficiencia del capital. Para prevenir eventos de liquidación por movimientos asimétricos, el algoritmo supervisa el margen de mantenimiento las 24 horas y ejecuta el protocolo automático de recarga o desapalancamiento preventivo si el umbral del 65% es alcanzado.
+                </p>
+                <p>
+                    <strong class="text-slate-200">4. No Custodia y Riesgo de Plataforma:</strong> YlistoBot no opera como entidad financiera, banco ni custodio de valores. El usuario retiene el 100% de la propiedad y control de sus fondos en su propia cuenta de Binance. YlistoBot no asume responsabilidad ante eventos sistémicos del exchange o indisponibilidad de la infraestructura externa.
+                </p>
+            </div>
+        </section>
+
+        <!-- Pricing / Gas Tank Packages Section -->
+        <section id="planes" class="mb-20 md:mb-28">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Alineación 100% Win-Win</span>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Planes de Carga: Gas Tank Prepago</h2>
+                <p class="text-slate-400 text-sm sm:text-base mt-2">Sin cuotas fijas mensuales obligatorias. Solo pagas una comisión del 15% sobre las ganancias netas acreditadas en tu propia cuenta.</p>
+                <div class="mt-4 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                    <i class="fas fa-ticket mr-1.5"></i> Cupos limitados por despliegue gradual de liquidez
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Package 1 -->
+                <div class="card-glass p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Pack Starter</div>
+                        <div class="text-4xl font-extrabold text-white font-mono mb-4">$20 <span class="text-xs text-slate-400">USDT</span></div>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-6">Ideal para comenzar con capitales de $500 a $2,000 USDT.</p>
+                        <ul class="text-xs text-slate-300 space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Cubre ~$133 USDT de ganancias netas</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Estrategia Cash & Carry 4x</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Monitoreo y alertas 24/7 en Telegram</li>
+                        </ul>
+                    </div>
+                    <a href="https://t.me/ylisto_bot" target="_blank" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 rounded-xl text-center text-sm transition flex items-center justify-center">
+                        <i class="fab fa-telegram mr-2"></i> Unirse a Lista de Espera ($20)
+                    </a>
+                </div>
+
+                <!-- Package 2 (Featured) -->
+                <div class="card-glass p-8 rounded-3xl border-2 border-cyan-500/50 flex flex-col justify-between relative shadow-xl shadow-cyan-500/10">
+                    <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-black text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full shadow">
+                        MÁS POPULAR
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-2">Pack Pro Growth</div>
+                        <div class="text-4xl font-extrabold text-white font-mono mb-4">$50 <span class="text-xs text-slate-400">USDT</span></div>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-6">Recomendado para carteras de $2,500 a $10,000 USDT.</p>
+                        <ul class="text-xs text-slate-300 space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Cubre ~$333 USDT de ganancias netas</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Cash & Carry 4x + Basis Box Trimestral</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Soporte prioritario en Telegram</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Alerta predictiva de recarga de gas</li>
+                        </ul>
+                    </div>
+                    <a href="https://t.me/ylisto_bot" target="_blank" class="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl text-center text-sm transition shadow-lg flex items-center justify-center">
+                        <i class="fab fa-telegram mr-2"></i> Acceso Anticipado ($50)
+                    </a>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="card-glass p-8 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Pack Institucional</div>
+                        <div class="text-4xl font-extrabold text-white font-mono mb-4">$100 <span class="text-xs text-slate-400">USDT</span></div>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-6">Para carteras de $10,000 a $50,000+ USDT.</p>
+                        <ul class="text-xs text-slate-300 space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Cubre ~$667 USDT de ganancias netas</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Asignador Tripartito Completo (Carry + Box + StatArb)</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Whitelist de IP estática dedicada</li>
+                            <li class="flex items-center"><i class="fas fa-check text-cyan-400 mr-2"></i> Asesoría de integración técnica 1 a 1</li>
+                        </ul>
+                    </div>
+                    <a href="https://t.me/ylisto_bot" target="_blank" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 rounded-xl text-center text-sm transition flex items-center justify-center">
+                        <i class="fab fa-telegram mr-2"></i> Solicitar Onboarding VIP ($100)
+                    </a>
+                </div>
+            </div>
         </section>
 
     </main>
 
-    
-    <footer class="p-12 border-t border-gray-800 text-center bg-black/30">
-        <div class="max-w-5xl mx-auto space-y-8">
-            <div class="flex justify-center space-x-6 opacity-50 mb-8">
-                <i class="fab fa-bitcoin text-2xl text-green-500/50"></i>
-                <i class="fab fa-ethereum text-2xl text-green-500/50"></i>
-                <i class="fas fa-shield-alt text-2xl text-green-500/50"></i>
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-12 px-6">
+        <div class="container mx-auto max-w-5xl text-center space-y-6">
+            <div class="flex justify-center items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-black font-extrabold text-sm">
+                    Y
+                </div>
+                <span class="text-lg font-bold font-mono text-white">YLISTOBOT</span>
             </div>
             
-            <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-gray-400 mb-4">AVISO LEGAL Y DESCARGO DE RESPONSABILIDAD DE ALTO RIESGO</h2>
-            
-            <div class="text-[10px] sm:text-xs text-gray-500 leading-relaxed text-justify space-y-4 uppercase tracking-tighter opacity-80">
-                <p><strong>1. RIESGO DE PÉRDIDA TOTAL:</strong> EL TRADING DE CRIPTOMONEDAS Y FUTUROS CONLLEVA UN NIVEL DE RIESGO EXTREMADAMENTE ALTO Y PUEDE NO SER ADECUADO PARA TODOS LOS INVERSORES. EL APALANCAMIENTO PUEDE TRABAJAR TANTO EN SU CONTRA COMO A SU FAVOR. EXISTE LA POSIBILIDAD DE QUE SUFRA UNA PÉRDIDA TOTAL DE SUS FONDOS INICIALES. NUNCA INVIERTA DINERO QUE NO PUEDA PERMITIRSE PERDER.</p>
-                
-                <p><strong>2. NO ES ASESORAMIENTO FINANCIERO:</strong> YLISTOBOT ES UNA HERRAMIENTA TECNOLÓGICA BASADA EN ALGORITMOS DE INTELIGENCIA ARTIFICIAL. TODA LA INFORMACIÓN PROPORCIONADA, INCLUIDAS LAS SEÑALES Y ESTADÍSTICAS, TIENE CARÁCTER EXCLUSIVAMENTE INFORMATIVO Y EDUCATIVO. NO CONSTITUYE, BAJO NINGUNA CIRCUNSTANCIA, ASESORAMIENTO FINANCIERO, DE INVERSIÓN O DE TRADING.</p>
-                
-                <p><strong>3. VARIABILIDAD DE RENDIMIENTOS:</strong> LOS RESULTADOS HISTÓRICOS MOSTRADOS EN ESTA PLATAFORMA SON SIMULACIONES O RESULTADOS PASADOS QUE NO GARANTIZAN, NI SON UN INDICADOR FIABLE DE RENDIMIENTOS FUTUROS. EL MERCADO CRIPTO ES VOLÁTIL Y CAMBIANTE; LOS ALGORITMOS PUEDEN FALLAR EN CONDICIONES DE MERCADO IMPREVISTAS.</p>
-                
-                <p><strong>4. RESPONSABILIDAD TÉCNICA Y PERSONAL:</strong> EL USUARIO ASUME LA RESPONSABILIDAD TOTAL DE CUALQUIER OPERACIÓN REALIZADA EN SU PROPIA CUENTA DE EXCHANGE. YLISTOBOT Y SUS DESARROLLADORES NO SE HACEN RESPONSABLES POR PÉRDIDAS FINANCIERAS, ERRORES TÉCNICOS, FALLOS DE CONEXIÓN CON BINANCE, LATENCIA DE API O EJECUCIÓN INCORRECTA DE ÓRDENES.</p>
-                
-                <p><strong>5. JURISDICCIÓN Y ACEPTACIÓN:</strong> AL UTILIZAR ESTE SITIO WEB O NUESTRAS SEÑALES, USTED ACEPTA QUE ENTIENDE ESTOS RIESGOS Y LIBERA A YLISTOBOT DE CUALQUIER RECLAMACIÓN LEGAL O JUICIO POR DAÑOS Y PERJUICIOS.</p>
+            <p class="text-xs text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                YlistoBot es un software cuantitativo de automatización algorítmica para Binance. No actúa como intermediario financiero ni custodio de fondos. El usuario mantiene el control exclusivo de sus activos en su propia cuenta de exchange mediante API keys seguras sin permisos de retiro.
+            </p>
+
+            <div class="flex justify-center space-x-6 text-xs text-slate-400 pt-2">
+                <a href="#simulador" class="hover:text-cyan-400">Calculadora</a>
+                <a href="#como-funciona" class="hover:text-cyan-400">Cómo Funciona</a>
+                <a href="#seguridad" class="hover:text-cyan-400">Seguridad y Riesgos</a>
+                <a href="https://t.me/ylisto_bot" target="_blank" class="hover:text-cyan-400">Canal Oficial Telegram</a>
             </div>
-            
-            <p class="text-gray-600 text-[10px] mt-12 uppercase tracking-widest">&copy; 2026 YLISTOBOT. DESARROLLO DE ALTA INGENIERÍA PARA EL MERCADO DIGITAL.</p>
+
+            <p class="text-[10px] text-slate-600 font-mono pt-4">
+                &copy; 2026 YLISTOBOT. INGENIERÍA CUANTITATIVA DELTA-NEUTRAL EN DERIVADOS.
+            </p>
         </div>
     </footer>
 
-
+    <!-- Interactive Calculator & Live Telemetry Fetch JS -->
     <script>
-        async function updateDashboard() {
-            try {
-                const response = await fetch('dashboard_data.json?t=' + new Date().getTime());
-                const data = await response.json();
-                document.getElementById('total-trades').innerText = data.total_closed_trades || '0';
-                document.getElementById('winrate').innerText = (data.win_rate || 0).toFixed(2) + '%';
-                
-                const metrics = [
-                    { id: 'daily-pnl', val: data.pnl_diario },
-                    { id: 'weekly-pnl', val: data.pnl_semanal },
-                    { id: 'monthly-pnl', val: data.pnl_mensual }
-                ];
+        const slider = document.getElementById('capital-slider');
+        const capitalDisplay = document.getElementById('capital-display');
+        const dailyNet = document.getElementById('daily-net');
+        const monthlyNet = document.getElementById('monthly-net');
+        const annualNet = document.getElementById('annual-net');
+        const labelNetApr = document.getElementById('label-net-apr');
+        const cmpYlisto = document.getElementById('cmp-ylisto');
+        const cmpAprYlisto = document.getElementById('cmp-apr-ylisto');
+        const cmpDescYlisto = document.getElementById('cmp-desc-ylisto');
+        const cmpBinance = document.getElementById('cmp-binance');
+        const cmpTbills = document.getElementById('cmp-tbills');
+        const btnModeTarget = document.getElementById('btn-mode-target');
+        const btnModeLive = document.getElementById('btn-mode-live');
 
-                metrics.forEach(m => {
-                    const el = document.getElementById(m.id);
-                    const val = m.val || 0;
-                    el.innerText = (val >= 0 ? '+' : '') + val.toFixed(2) + '%';
-                    // Mantener la clase neon-text siempre
-                    el.className = 'text-3xl font-bold neon-text font-mono ' + (val >= 0 ? 'text-green-400' : 'text-red-400');
-                });
+        // Telemetry DOM elements
+        const heroLiveApr = document.getElementById('hero-live-apr');
+        const heroLiveShortApr = document.getElementById('hero-live-short-apr');
+        const heroLiveEquity = document.getElementById('hero-live-equity');
+        const kpiLiveApr = document.getElementById('kpi-live-apr');
+        const kpiLiveShortApr = document.getElementById('kpi-live-short-apr');
+        const telEquity = document.getElementById('tel-equity');
+        const telDeployable = document.getElementById('tel-deployable');
+        const telDaily = document.getElementById('tel-daily');
+        const telLastUpdate = document.getElementById('tel-last-update');
 
-                if (data.active_pairs) {
-                    let h = '';
-                    data.active_pairs.forEach(p => {
-                        h += '<span class="flex-1 min-w-[120px] text-center px-3 py-2 rounded-lg bg-white/[0.03] border border-green-500/20 text-green-400 font-mono text-xs sm:text-sm shadow-lg shadow-green-500/5">' + p + '</span>';
-                    });
-                    document.getElementById('active-pairs-container').innerHTML = h;
-                }
-                
-                if (data.pair_ranking && data.pair_ranking.length > 0) {
-                    let html = '<table class="w-full text-left font-mono"><thead class="text-gray-500 border-b border-gray-800 uppercase text-xs"><tr><th class="py-4 px-2">Par</th><th class="py-4 px-2 text-center">Ops</th><th class="py-4 px-2 text-right">Winrate</th></tr></thead><tbody class="text-sm">';
-                    data.pair_ranking.forEach(item => {
-                        html += '<tr class="border-b border-gray-800/30"><td class="py-4 px-2 font-bold">' + item.pair + '</td><td class="py-4 px-2 text-center">' + item.total + '</td><td class="py-4 px-2 text-right font-bold text-green-400">' + item.win_rate.toFixed(2) + '%</td></tr>';
-                    });
-                    document.getElementById('ranking-container').innerHTML = html + '</tbody></table>';
-                }
-            } catch (e) { console.error(e); }
+        // Dynamic parameters
+        let liveAprTotalEquity = 2.27; // Fallback
+        let liveAprShortNotional = 10.00;
+        let isLiveMode = false;
+
+        const TARGET_GROSS_APR = 0.12;       // 12.0% APR Bruto
+        const PERFORMANCE_FEE = 0.15;        // 15% Performance Fee
+        const TARGET_NET_APR = TARGET_GROSS_APR * (1 - PERFORMANCE_FEE); // 10.20% APR Neto
+        const BINANCE_EARN_APR = 0.06;       // 6.00% APR
+        const TBILLS_APR = 0.045;            // 4.50% APR
+
+        function updateCalculator() {
+            const capital = parseFloat(slider.value) || 5000;
+            capitalDisplay.innerText = Number(capital).toLocaleString('en-US');
+
+            const currentApr = isLiveMode ? ((liveAprTotalEquity / 100) * (1 - PERFORMANCE_FEE)) : TARGET_NET_APR;
+            const aprDisplayPct = (currentApr * 100).toFixed(2);
+
+            const annualNetUsdt = capital * currentApr;
+            const monthlyNetUsdt = annualNetUsdt / 12;
+            const dailyNetUsdt = annualNetUsdt / 365;
+
+            dailyNet.innerText = dailyNetUsdt.toFixed(2);
+            monthlyNet.innerText = monthlyNetUsdt.toFixed(2);
+            annualNet.innerText = annualNetUsdt.toFixed(2);
+            labelNetApr.innerText = aprDisplayPct + '% APR Neto';
+
+            // Benchmarking comparison
+            cmpYlisto.innerText = annualNetUsdt.toFixed(2);
+            cmpAprYlisto.innerText = '+' + aprDisplayPct + '% APR';
+            cmpDescYlisto.innerText = aprDisplayPct + '% APR Neto • Custodia propia • Liquidez inmediata';
+            cmpBinance.innerText = (capital * BINANCE_EARN_APR).toFixed(2);
+            cmpTbills.innerText = (capital * TBILLS_APR).toFixed(2);
         }
-        updateDashboard();
-        setInterval(updateDashboard, 30000);
+
+        slider.addEventListener('input', updateCalculator);
+
+        btnModeTarget.addEventListener('click', () => {
+            isLiveMode = false;
+            btnModeTarget.className = 'px-5 py-2 rounded-lg text-xs font-bold transition bg-cyan-500 text-black';
+            btnModeLive.className = 'px-5 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition';
+            updateCalculator();
+        });
+
+        btnModeLive.addEventListener('click', () => {
+            isLiveMode = true;
+            btnModeLive.className = 'px-5 py-2 rounded-lg text-xs font-bold transition bg-emerald-500 text-black';
+            btnModeTarget.className = 'px-5 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition';
+            updateCalculator();
+        });
+
+        // Fetch Live Telemetry from dashboard_data.json
+        async function fetchLiveTelemetry() {
+            try {
+                const res = await fetch('./dashboard_data.json?t=' + Date.now());
+                if (!res.ok) return;
+                const data = await res.json();
+                const tel = data.delta_neutral_telemetry;
+                if (!tel) return;
+
+                if (tel.portfolio_apr_total_equity_pct) {
+                    liveAprTotalEquity = parseFloat(tel.portfolio_apr_total_equity_pct);
+                    heroLiveApr.innerText = liveAprTotalEquity.toFixed(2) + '%';
+                    kpiLiveApr.innerText = liveAprTotalEquity.toFixed(2) + '%';
+                }
+                if (tel.portfolio_apr_short_notional_pct) {
+                    liveAprShortNotional = parseFloat(tel.portfolio_apr_short_notional_pct);
+                    heroLiveShortApr.innerText = liveAprShortNotional.toFixed(2) + '%';
+                    kpiLiveShortApr.innerText = liveAprShortNotional.toFixed(2) + '%';
+                }
+                if (tel.real_equity_usdt) {
+                    const eqFormatted = '$' + Number(tel.real_equity_usdt).toLocaleString('en-US', {minimumFractionDigits: 2}) + ' USDT';
+                    heroLiveEquity.innerText = eqFormatted;
+                    telEquity.innerText = eqFormatted;
+                }
+                if (tel.effective_deployable_capital_usdt) {
+                    telDeployable.innerText = '$' + Number(tel.effective_deployable_capital_usdt).toLocaleString('en-US', {minimumFractionDigits: 2}) + ' USDT';
+                }
+                if (tel.daily_cashflow_usdt) {
+                    telDaily.innerText = '+' + parseFloat(tel.daily_cashflow_usdt).toFixed(4) + ' USDT/día';
+                }
+                if (data.last_update) {
+                    telLastUpdate.innerText = data.last_update + ' UTC';
+                }
+                updateCalculator();
+            } catch (err) {
+                console.log('Using default telemetry:', err);
+            }
+        }
+
+        fetchLiveTelemetry();
+        updateCalculator();
     </script>
 </body>
 </html>

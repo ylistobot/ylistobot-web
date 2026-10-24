@@ -19,6 +19,21 @@
             "PnL": -0.08988421000000357
         }
     ],
-    "last_update": "24/10/2026 17:00",
+    "delta_neutral_telemetry": {
+        "strategy": "DELTA_NEUTRAL_CARRY_4X",
+        "mode": "LIVE",
+        "real_equity_usdt": 1623.07,
+        "portfolio_apr_total_equity_pct": 2.27,
+        "portfolio_apr_short_notional_pct": 10.0,
+        "daily_cashflow_usdt": 0.1011,
+        "annualized_cashflow_usdt": 36.9,
+        "active_positions_count": 11,
+        "effective_deployable_capital_usdt": 1130.29,
+        "delta_total": 0.0,
+        "target_leverage": "4x Cross Margin",
+        "accounting_status": "RECONCILIATION_DEGRADED",
+        "updated_at_utc": "2026-10-24T20:12:47.969259+00:00"
+    },
+    "last_update": "24/10/2026 17:29",
     "status": "SISTEMA ACTIVO"
 }
