@@ -23,8 +23,8 @@
         "strategy": "DELTA_NEUTRAL_CARRY_4X",
         "mode": "INSTITUTIONAL_LIVE",
         "target_apr_range": "10% \u2013 14% APR",
-        "portfolio_apr_total_equity_pct": 2.3,
-        "portfolio_apr_short_notional_pct": 10.94,
+        "portfolio_apr_total_equity_pct": 5.73,
+        "portfolio_apr_short_notional_pct": 10.95,
         "delta_total": 0.0,
         "market_directional_risk": "0.00% (Strict \u0394 = 0)",
         "positive_funding_ratio_pct": 98.4,
@@ -36,8 +36,8 @@
         "min_gas_recharge_usdt": 20.0,
         "custody": "100% Client Binance Account (No Custodial)",
         "accounting_status": "RECONCILIATION_OK",
-        "updated_at_utc": "2026-10-24T21:44:43.376872+00:00"
+        "updated_at_utc": "2026-10-24T22:42:16.311896+00:00"
     },
-    "last_update": "24/10/2026 19:10",
+    "last_update": "24/10/2026 19:43",
     "status": "SISTEMA ACTIVO"
 }
