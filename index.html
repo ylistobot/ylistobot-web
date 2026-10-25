@@ -142,8 +142,8 @@
             </div>
             <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium text-slate-300">
                 <a href="#simulador" class="hover:text-cyan-400 transition">Calculadora</a>
-                <a href="#alta-baja" class="hover:text-cyan-400 transition">Cómo Ingresar y Salir</a>
-                <a href="#gas-tank-libre" class="hover:text-cyan-400 transition">Gas Tank Libre</a>
+                <a href="#alta-baja" class="hover:text-cyan-400 transition">Guía de Conexión y Desarme</a>
+                <a href="#credito-comisiones" class="hover:text-cyan-400 transition">Crédito de Comisiones</a>
                 <a href="#seguridad" class="hover:text-cyan-400 transition">Seguridad y Riesgos</a>
             </nav>
             <div class="flex items-center space-x-3">
@@ -374,40 +374,66 @@
             </div>
         </section>
 
-        <!-- Transparency Section: How to Enter and How to Exit (Vertical Timeline) -->
+        <!-- Transparency Section: How to Connect Your Account & How to Exit -->
         <section id="alta-baja" class="mb-16 sm:mb-20 md:mb-28">
             <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
                 <span class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Transparencia Radical</span>
-                <h2 class="fluid-h2 font-bold tracking-tight text-white">¿Cómo Ingresar y Cómo Salir?</h2>
-                <p class="text-slate-400 text-xs sm:text-sm md:text-base mt-2">Flexibilidad total. Sin letra chica, sin plazos forzosos y con control absoluto de tus fondos.</p>
+                <h2 class="fluid-h2 font-bold tracking-tight text-white">Guía de Conexión y Desarme</h2>
+                <p class="text-slate-400 text-xs sm:text-sm md:text-base mt-2">Flexibilidad total. Sin letra chica, sin plazos forzosos y con control absoluto de tus fondos en Binance.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
-                <!-- Columna Alta: Cómo Ingresar (Timeline) -->
+                <!-- Columna Alta: Cómo Conectar tu Cuenta (4 Pasos Didácticos) -->
                 <div class="card-glass p-5 sm:p-8 md:p-10 rounded-3xl border border-cyan-500/30 flex flex-col justify-between">
                     <div>
                         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6">
-                            <i class="fas fa-arrow-right-to-bracket"></i>
-                            <span>ALTA TRANSPARENTE EN 3 PASOS</span>
+                            <i class="fas fa-plug-circle-bolt"></i>
+                            <span>GUÍA PASO A PASO: CÓMO CONECTAR TU CUENTA</span>
                         </div>
-                        <h3 class="fluid-h3 font-bold text-white mb-6">Comenzar a Generar Rendimiento</h3>
+                        <h3 class="fluid-h3 font-bold text-white mb-6">Habilitar Operación en Binance</h3>
                         
                         <div class="space-y-6 text-sm text-slate-300">
                             <!-- Timeline Step 1 -->
                             <div class="timeline-step relative pl-11 sm:pl-12">
                                 <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">1</div>
                                 <div>
-                                    <strong class="text-white block mb-1 text-sm sm:text-base">Conectas tu API de Binance Sin Retiros</strong>
-                                    <p class="text-slate-400 text-xs leading-relaxed">Creas tu API Key activando lectura y trading (Spot + Futuros). <span class="text-cyan-300 font-semibold">Desmarcas 'Enable Withdrawals'.</span> El sistema rechaza criptográficamente cualquier key con permisos de retiro.</p>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Crear API Key en Binance</strong>
+                                    <p class="text-slate-400 text-xs leading-relaxed">Ingresas a tu perfil en Binance &rarr; <span class="text-slate-200 font-semibold">Gestión de API</span> y seleccionas <span class="text-cyan-300 font-semibold">"Generada por el sistema"</span>. Asignas una etiqueta descriptiva (ej: <code>YlistoBot-Delta</code>).</p>
                                 </div>
                             </div>
 
-                            <!-- Timeline Step 2 -->
+                            <!-- Timeline Step 2: Permissions Checklist -->
                             <div class="timeline-step relative pl-11 sm:pl-12">
                                 <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">2</div>
                                 <div>
-                                    <strong class="text-white block mb-1 text-sm sm:text-base">Cargas tu Gas Tank Libre (Piso $20 USDT)</strong>
-                                    <p class="text-slate-400 text-xs leading-relaxed">Sin paquetes rígidos: recargas el monto que prefieras. Tus fondos de inversión quedan 100% en Binance; el Gas Tank solo abona el 15% sobre utilidades reales devengadas.</p>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Configurar Permisos Obligatorios</strong>
+                                    <p class="text-slate-400 text-xs leading-relaxed mb-3">Estableces exactamente las casillas requeridas para operar sin ceder custodia:</p>
+                                    
+                                    <!-- Checklist visual interactivo de permisos -->
+                                    <div class="bg-slate-950/90 rounded-2xl p-3.5 sm:p-4 border border-slate-800 space-y-2 text-xs font-mono">
+                                        <div class="flex items-center justify-between text-emerald-400 bg-emerald-950/20 px-3 py-1.5 rounded-lg border border-emerald-500/20">
+                                            <span class="flex items-center"><i class="fas fa-square-check mr-2 text-sm"></i> Lectura habilitada (Read Only)</span>
+                                            <span class="text-[10px] uppercase font-bold text-emerald-500">Obligatorio</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-emerald-400 bg-emerald-950/20 px-3 py-1.5 rounded-lg border border-emerald-500/20">
+                                            <span class="flex items-center"><i class="fas fa-square-check mr-2 text-sm"></i> Trading Spot y Margin habilitado</span>
+                                            <span class="text-[10px] uppercase font-bold text-emerald-500">Obligatorio</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-emerald-400 bg-emerald-950/20 px-3 py-1.5 rounded-lg border border-emerald-500/20">
+                                            <span class="flex items-center"><i class="fas fa-square-check mr-2 text-sm"></i> Futuros USDⓈ-M habilitado</span>
+                                            <span class="text-[10px] uppercase font-bold text-emerald-500">Obligatorio</span>
+                                        </div>
+                                        <div class="flex items-start justify-between text-rose-300 bg-rose-950/30 px-3 py-2 rounded-lg border border-rose-500/40">
+                                            <div class="flex items-start">
+                                                <i class="fas fa-square-xmark mr-2 text-sm text-rose-400 shrink-0 mt-0.5"></i>
+                                                <div>
+                                                    <span class="font-bold text-rose-300 block">Habilitar Retiros: ESTRICTAMENTE APAGADO</span>
+                                                    <span class="text-[10px] text-slate-400 font-sans block mt-0.5 leading-snug">Garantía de no custodia: los fondos nunca pueden salir de Binance. El sistema rechaza claves con retiros.</span>
+                                                </div>
+                                            </div>
+                                            <span class="text-[10px] uppercase font-bold text-rose-400 shrink-0 ml-2">Destildado</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -415,8 +441,17 @@
                             <div class="timeline-step relative pl-11 sm:pl-12">
                                 <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">3</div>
                                 <div>
-                                    <strong class="text-white block mb-1 text-sm sm:text-base">Monitoreo Pasivo y Cobro Periódico</strong>
-                                    <p class="text-slate-400 text-xs leading-relaxed">El bot despliega la cobertura delta-neutral (&Delta; = 0). Cobras fondeos cada 4 u 8 horas en tu exchange y consultas tu balance con <code class="text-emerald-400 font-mono">/balance</code> en Telegram.</p>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Cargar Crédito para Comisiones y Vincular</strong>
+                                    <p class="text-slate-400 text-xs leading-relaxed">Cargas tu Crédito de Comisiones (mínimo $20 USDT) vía Telegram y vinculas tus claves mediante canal seguro cifrado AES-256-GCM. <span class="text-emerald-400 font-semibold">Garantía No Profit = No Fee.</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Timeline Step 4 -->
+                            <div class="timeline-step relative pl-11 sm:pl-12">
+                                <div class="absolute left-0 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center font-bold font-mono text-xs sm:text-sm shadow-md">4</div>
+                                <div>
+                                    <strong class="text-white block mb-1 text-sm sm:text-base">Monitoreo Autónomo y Cobro de Fondeos</strong>
+                                    <p class="text-slate-400 text-xs leading-relaxed">El motor despliega la cobertura delta-neutral (&Delta; = 0). Cobras financiamiento cada 4 u 8 horas directamente en tu Binance y consultas tu balance con <code class="text-emerald-400 font-mono">/balance</code> en Telegram.</p>
                                 </div>
                             </div>
                         </div>
@@ -424,7 +459,7 @@
 
                     <div class="mt-8 pt-6 border-t border-slate-800">
                         <a href="https://t.me/ylisto_bot" target="_blank" class="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 rounded-xl text-center text-xs sm:text-sm transition flex items-center justify-center shadow-lg min-h-[48px]">
-                            <i class="fab fa-telegram mr-2"></i> Darme de Alta en Telegram
+                            <i class="fab fa-telegram mr-2"></i> Iniciar Conexión en Telegram
                         </a>
                     </div>
                 </div>
@@ -477,23 +512,24 @@
             </div>
         </section>
 
-        <!-- Free Gas Tank Model Section -->
-        <section id="gas-tank-libre" class="card-glass p-5 sm:p-8 md:p-12 lg:p-16 rounded-3xl md:rounded-[2.5rem] border border-cyan-500/20 mb-16 sm:mb-20 md:mb-28">
+        <!-- Free Credit for Fees Section -->
+        <section id="credito-comisiones" class="card-glass p-5 sm:p-8 md:p-12 lg:p-16 rounded-3xl md:rounded-[2.5rem] border border-cyan-500/20 mb-16 sm:mb-20 md:mb-28">
+            <span id="gas-tank-libre" class="sr-only"></span>
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-8 sm:mb-12">
                     <span class="text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest block mb-2">Alineación 100% Win-Win</span>
-                    <h2 class="fluid-h2 font-bold tracking-tight text-white">Gas Tank de Saldo Libre</h2>
-                    <p class="text-slate-400 text-xs sm:text-sm md:text-base mt-2 max-w-2xl mx-auto">Erradicamos los planes rígidos: recargas exactamente el monto que desees con un piso mínimo de $20 USDT.</p>
+                    <h2 class="fluid-h2 font-bold tracking-tight text-white">Crédito para Comisiones de Ylistobot</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm md:text-base mt-2 max-w-2xl mx-auto">Sin suscripciones mensuales fijas ni ataduras: recargas el crédito que prefieras para comisiones de rendimiento.</p>
                     <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 max-w-full leading-snug text-center">
-                        <i class="fas fa-hand-holding-dollar shrink-0"></i> <span class="whitespace-normal break-words">Regla Inviolable: No Profit = No Fee (15% sobre utilidades reales)</span>
+                        <i class="fas fa-hand-holding-dollar shrink-0"></i> <span class="whitespace-normal break-words">Mínimo de recarga: $20 USDT. Saldo 100% no custodial. No se consume si no hay ganancias netas (No Profit = No Fee).</span>
                     </div>
                 </div>
 
-                <!-- Interactive Gas Tank Calculator Widget -->
+                <!-- Interactive Credit for Fees Calculator Widget -->
                 <div class="bg-slate-900/90 p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-slate-800 mb-8 shadow-xl">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
                         <div>
-                            <span class="text-xs uppercase font-bold text-slate-400 block mb-1">Monto de Recarga Libre:</span>
+                            <span class="text-xs uppercase font-bold text-slate-400 block mb-1">Monto de Crédito a Cargar:</span>
                             <span class="text-[11px] sm:text-xs text-slate-500 font-mono">Piso mínimo estricto: $20.00 USDT</span>
                         </div>
                         <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono bg-cyan-950/60 px-4 sm:px-5 py-1.5 sm:py-2 rounded-2xl border border-cyan-500/30">
@@ -538,7 +574,7 @@
 
                 <div class="text-center">
                     <a href="https://t.me/ylisto_bot" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl shadow-lg transition min-h-[48px]">
-                        Recargar Gas Tank en Telegram <i class="fab fa-telegram ml-2"></i>
+                        Cargar Crédito de Comisiones en Telegram <i class="fab fa-telegram ml-2"></i>
                     </a>
                     <p class="text-xs text-slate-500 mt-3 font-mono">Comando rápido en bot: <code>/recargar &lt;monto&gt;</code> &bull; Monedas: BNB / USDT</p>
                 </div>
@@ -658,7 +694,7 @@
             <div class="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs text-slate-400 pt-2">
                 <a href="#simulador" class="hover:text-cyan-400">Calculadora</a>
                 <a href="#alta-baja" class="hover:text-cyan-400">Cómo Ingresar y Salir</a>
-                <a href="#gas-tank-libre" class="hover:text-cyan-400">Gas Tank Libre</a>
+                <a href="#credito-comisiones" class="hover:text-cyan-400">Crédito de Comisiones</a>
                 <a href="#seguridad" class="hover:text-cyan-400">Seguridad y Riesgos</a>
                 <a href="https://t.me/ylisto_bot" target="_blank" class="hover:text-cyan-400">Canal Oficial Telegram</a>
             </div>
