@@ -21,13 +21,13 @@
         }
     ],
     "delta_neutral_telemetry": {
-        "strategy": "DELTA_NEUTRAL_CARRY_4X",
+        "strategy": "SISTEMA_AUTOMATIZADO_EN_DOLARES",
         "mode": "INSTITUTIONAL_LIVE",
         "target_apr_range": "10% \u2013 14% Rendimiento Anualizado",
         "portfolio_apr_total_equity_pct": 7.97,
         "portfolio_apr_short_notional_pct": 10.95,
         "delta_total": 0.0,
-        "market_directional_risk": "0.00% (Strict \u0394 = 0)",
+        "market_directional_risk": "0.00% (Protegido en Dolares)",
         "positive_funding_ratio_pct": 98.4,
         "target_leverage": "4x Cross Margin",
         "safeguard_auto_margin_top_up": "ACTIVE (65% Threshold)",
@@ -37,9 +37,9 @@
         "min_gas_recharge_usdt": 20.0,
         "custody": "100% Client Binance Account (No Custodial)",
         "accounting_status": "RECONCILIATION_OK",
-        "updated_at_utc": "2026-10-26T14:16:22.485916+00:00"
+        "updated_at_utc": "2026-10-26T21:27:35.528653+00:00"
     },
-    "last_update": "26/10/2026 11:30",
+    "last_update": "26/10/2026 18:35",
     "version": "RC-1.1",
     "status": "SISTEMA ACTIVO"
 }
