@@ -24,8 +24,8 @@
         "strategy": "SISTEMA_AUTOMATIZADO_EN_DOLARES",
         "mode": "INSTITUTIONAL_LIVE",
         "target_apr_range": "10% \u2013 14% Rendimiento Anualizado",
-        "portfolio_apr_total_equity_pct": 19.91,
-        "portfolio_apr_short_notional_pct": 30.36,
+        "portfolio_apr_total_equity_pct": 22.61,
+        "portfolio_apr_short_notional_pct": 34.49,
         "delta_total": 0.0,
         "market_directional_risk": "0.00% (Protegido en Dolares)",
         "positive_funding_ratio_pct": 98.4,
@@ -37,9 +37,9 @@
         "min_gas_recharge_usdt": 20.0,
         "custody": "100% Client Binance Account (No Custodial)",
         "accounting_status": "RECONCILIATION_OK",
-        "updated_at_utc": "2026-11-12T02:23:48.346608+00:00"
+        "updated_at_utc": "2026-11-12T02:54:32.733554+00:00"
     },
-    "last_update": "11/11/2026 23:54",
+    "last_update": "11/11/2026 23:55",
     "version": "RC-1.1",
     "status": "SISTEMA ACTIVO"
 }
